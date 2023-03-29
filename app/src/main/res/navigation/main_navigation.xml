@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.itacademy.waceplare.ui.fragments.SearchFragment"
+        android:name="com.itacademy.waceplare.ui.fragment.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/navigation_ads"
-        android:name="com.itacademy.waceplare.ui.fragments.AdsFragment"
+        android:name="com.itacademy.waceplare.ui.fragment.AdsFragment"
         android:label="fragment_ads"
         tools:layout="@layout/fragment_ads" />
     <fragment
         android:id="@+id/navigation_messages"
-        android:name="com.itacademy.waceplare.ui.fragments.MessagesFragment"
+        android:name="com.itacademy.waceplare.ui.fragment.MessagesFragment"
         android:label="fragment_messages"
         tools:layout="@layout/fragment_messages" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.itacademy.waceplare.ui.fragments.ProfileFragment"
+        android:name="com.itacademy.waceplare.ui.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/navigation_favourites"
-        android:name="com.itacademy.waceplare.ui.fragments.FavoritesFragment"
+        android:name="com.itacademy.waceplare.ui.fragment.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
 </navigation>
