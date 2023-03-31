@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface SearchApi {
 
-    @GET("ads/all")
+    @GET("ads")
     suspend fun getAllAds(): Response<List<Ad>>
 
 

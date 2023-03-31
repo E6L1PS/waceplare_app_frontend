@@ -41,7 +41,7 @@ class AdsAdapter : RecyclerView.Adapter<AdsAdapter.AdsVH>() {
         val ad = differ.currentList[position]
         with(holder.binding) {
             tvTitle.text = ad.title
-            tvPrice.text = ad.price.toString()
+            tvPrice.text = String.format("%,d", ad.price).replace(",", " ").plus(" Р")
             tvDateOfCreation.text = ad.dateOfCreated
         }
 

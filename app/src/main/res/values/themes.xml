@@ -14,4 +14,10 @@
         <item name="android:statusBarColor">@color/gray</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="SplashActivity" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_theme</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
 </resources>
