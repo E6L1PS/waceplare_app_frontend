@@ -19,4 +19,9 @@
     <string name="login_failed">"Login failed"</string>
     <string name="auth">Авторизация</string>
     <string name="reg">Регистрация</string>
+    <string name="my_ads">Мои объявления</string>
+    <string name="place_ad">Разместить объявление</string>
+    <string name="profile">Профиль</string>
+    <string name="messages">Сообщения</string>
+    <string name="favorites">Избранное</string>
 </resources>

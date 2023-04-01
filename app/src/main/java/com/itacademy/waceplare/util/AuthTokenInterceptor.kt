@@ -11,12 +11,14 @@ class AuthTokenInterceptor @Inject constructor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val token = sharedPreferences.getString("jwt_token", null)
+        val token = sharedPreferences.getString(Constants.JWT_KEY, null)
         val request = chain.request()
-        Log.i("okHttp.JWT", token.toString())
 
-        val authenticatedRequest = if (token != null) {
-            Log.i("okHttp.JWT", token)
+        //TODO change logic
+        Log.i("okHttp.JWT", token.toString())
+        Log.i("okHttp.JWT", request.url.encodedPath)
+        val authenticatedRequest = if (isAuthRequired(request.url.encodedPath) && token != null) {
+            Log.i("okHttp.JWT", request.url.toString())
             request.newBuilder()
                 .addHeader("Authorization", "Bearer $token")
                 .build()
@@ -25,4 +27,11 @@ class AuthTokenInterceptor @Inject constructor(
         }
         return chain.proceed(authenticatedRequest)
     }
+
+    private fun isAuthRequired(url: String): Boolean {
+        Log.d("okHttp.JWT", Constants.excludedUrls.contains(url).toString())
+        // Проверяем, нужно ли добавлять токен к текущему URL
+        return !Constants.excludedUrls.contains(url)
+    }
+
 }

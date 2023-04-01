@@ -25,13 +25,12 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("auth!!!", "1")
+
         lifecycleScope.launchWhenStarted {
             viewModel.isAuthenticated.collect { isAuthenticated ->
                 launchMainScreen(isAuthenticated)
             }
         }
-            //launchMainScreen(viewModel.isAuthenticated.value) // TODO create a functional signIn
     }
     private fun launchMainScreen(isSignedIn: Boolean) {
         val intent = Intent(requireContext(), MainActivity::class.java)

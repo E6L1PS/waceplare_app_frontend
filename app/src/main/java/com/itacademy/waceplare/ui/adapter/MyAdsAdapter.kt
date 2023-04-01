@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.itacademy.waceplare.R
 import com.itacademy.waceplare.data.model.Ad
-import com.itacademy.waceplare.databinding.ItemAdBinding
+import com.itacademy.waceplare.databinding.ItemMyAdBinding
 
-class AdsAdapter : RecyclerView.Adapter<AdsAdapter.AdsVH>() {
+class MyAdsAdapter : RecyclerView.Adapter<MyAdsAdapter.MyAdsVH>() {
 
-    inner class AdsVH(val binding: ItemAdBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class MyAdsVH(val binding: ItemMyAdBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Ad>() {
         override fun areItemsTheSame(oldItem: Ad, newItem: Ad): Boolean {
@@ -26,9 +26,9 @@ class AdsAdapter : RecyclerView.Adapter<AdsAdapter.AdsVH>() {
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdsVH {
-        return AdsVH(
-            ItemAdBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdsVH {
+        return MyAdsVH(
+            ItemMyAdBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -38,15 +38,15 @@ class AdsAdapter : RecyclerView.Adapter<AdsAdapter.AdsVH>() {
 
     override fun getItemCount(): Int = differ.currentList.size
 
-    override fun onBindViewHolder(holder: AdsVH, position: Int) {
+    override fun onBindViewHolder(holder: MyAdsVH, position: Int) {
         val ad = differ.currentList[position]
         with(holder.binding) {
-            tvTitle.text = ad.title
-            tvPrice.text = String.format("%,d", ad.price).replace(",", " ").plus(" Р")
-            tvDateOfCreation.text = ad.dateOfCreated
-            ivAd.setImageResource(R.drawable.waceplare)
+            tvMyTitle.text = ad.title
+            tvMyPrice.text = String.format("%,d", ad.price).replace(",", " ").plus(" Р")
+            ivMyAd.setImageResource(R.drawable.waceplare)
+            tvViews.text = ad.views.toString()
+            
         }
-
     }
 
 }

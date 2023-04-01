@@ -1,8 +1,9 @@
 package com.itacademy.waceplare.data.repository
 
-import com.itacademy.waceplare.data.api.SearchApi
+import com.itacademy.waceplare.data.api.AdsApi
 import com.itacademy.waceplare.data.model.Ad
-import com.itacademy.waceplare.domain.repository.AdsRepository
+import com.itacademy.waceplare.domain.model.AdDTO
+import com.itacademy.waceplare.domain.repository.MyAdsRepository
 import com.itacademy.waceplare.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -10,19 +11,16 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class AdsRepositoryImpl @Inject constructor(
-    private val api: SearchApi
-) : AdsRepository {
+class MyAdsRepositoryImpl @Inject constructor(
+    private val api: AdsApi
+) : MyAdsRepository {
 
-    override suspend fun getAds(title: String?): Flow<Resource<List<Ad>?>> = flow {
+    override suspend fun getAds(): Flow<Resource<List<Ad>?>> =  flow {
         emit(Resource.loading(null))
 
-        val response = if (title == null) {
-            api.getAllAds()
-        } else {
-            api.getAllAds(title)
-        }
+        val response = api.getAds()
 
         if (response.isSuccessful) {
             emit(Resource.success(response.body()))
@@ -34,5 +32,9 @@ class AdsRepositoryImpl @Inject constructor(
         emit(Resource.error(exception.message ?: "Error occurred", null))
     }.flowOn(Dispatchers.IO)
 
+
+    override suspend fun postAd(ad: AdDTO) {
+        api.postAd(ad)
+    }
 
 }

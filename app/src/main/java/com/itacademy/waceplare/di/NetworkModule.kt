@@ -3,6 +3,7 @@ package com.itacademy.waceplare.di
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.itacademy.waceplare.data.api.AdsApi
 import com.itacademy.waceplare.data.api.AuthApi
 import com.itacademy.waceplare.data.api.SearchApi
 import com.itacademy.waceplare.util.AuthTokenInterceptor
@@ -60,11 +61,14 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
+
+    @Provides
+    @Singleton
     fun provideSearchApi(retrofit: Retrofit): SearchApi = retrofit.create(SearchApi::class.java)
 
     @Provides
     @Singleton
-    fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
-
+    fun provideAdsApi(retrofit: Retrofit): AdsApi = retrofit.create(AdsApi::class.java)
 
 }

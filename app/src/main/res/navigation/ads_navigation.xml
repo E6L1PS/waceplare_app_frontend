@@ -8,6 +8,7 @@
     <fragment
         android:id="@+id/adsFragment"
         android:name="com.itacademy.waceplare.ui.fragment.AdsFragment"
-        android:label="fragment_ads"
+        android:label="@string/my_ads"
         tools:layout="@layout/fragment_ads" />
+
 </navigation>

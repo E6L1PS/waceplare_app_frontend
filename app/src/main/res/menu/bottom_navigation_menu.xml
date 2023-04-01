@@ -4,23 +4,23 @@
 
     <item
         android:id="@+id/search_navigation"
-        android:icon="@drawable/baseline_manage_search_24"
+        android:icon="@drawable/manage_search_ic"
         android:title="@string/Search" />
     <item
         android:id="@+id/favorites_navigation"
-        android:icon="@drawable/baseline_favorite_24"
+        android:icon="@drawable/favorite_ic"
         android:title="@string/Favorite" />
     <item
         android:id="@+id/ads_navigation"
-        android:icon="@drawable/baseline_post_add_24"
+        android:icon="@drawable/post_add_ic"
         android:title="@string/Ads" />
     <item
         android:id="@+id/messages_navigation"
-        android:icon="@drawable/baseline_message_24"
+        android:icon="@drawable/message_ic"
         android:title="@string/Messages" />
     <item
         android:id="@+id/profile_navigation"
-        android:icon="@drawable/baseline_person_24"
+        android:icon="@drawable/person_ic"
         android:title="@string/Profile" />
 
 </menu>

@@ -1,22 +1,24 @@
 package com.itacademy.waceplare.data.repository
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.itacademy.waceplare.data.api.AuthApi
 import com.itacademy.waceplare.data.model.auth.AuthResult
 import com.itacademy.waceplare.data.model.auth.AuthenticationRequest
 import com.itacademy.waceplare.data.model.auth.RegisterRequest
 import com.itacademy.waceplare.domain.repository.AuthRepository
+import com.itacademy.waceplare.util.Constants
 import retrofit2.HttpException
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-    private val authApi: AuthApi,
+    private val api: AuthApi,
     private val sharedPreferences: SharedPreferences
 ): AuthRepository {
 
      override suspend fun signUp(registerRequest: RegisterRequest): AuthResult<Unit> {
         return try {
-            val response = authApi.signUp(registerRequest)
+            val response = api.signUp(registerRequest)
             sharedPreferences.edit()
                 .putString("jwt_token", response.token)
                 .apply()
@@ -35,9 +37,10 @@ class AuthRepositoryImpl @Inject constructor(
 
      override suspend fun signIn(authenticationRequest: AuthenticationRequest): AuthResult<Unit> {
         return try {
-            val response = authApi.signIn(authenticationRequest)
+            val response = api.signIn(authenticationRequest)
+
             sharedPreferences.edit()
-                .putString("jwt", response.token)
+                .putString(Constants.JWT_KEY, response.token)
                 .apply()
 
             AuthResult.Authorized()
@@ -54,7 +57,7 @@ class AuthRepositoryImpl @Inject constructor(
 
      override suspend fun isAuthenticated(): AuthResult<Unit> {
         return try {
-            if (authApi.isAuthenticated()) {
+            if (api.isAuthenticated()) {
                 AuthResult.Authorized()
             } else {
                 AuthResult.Unauthorized()
