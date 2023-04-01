@@ -8,7 +8,10 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.waceplare.R
 import com.itacademy.waceplare.databinding.FragmentTabsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class TabsFragment : Fragment(R.layout.fragment_tabs) {
 
     private val binding by viewBinding<FragmentTabsBinding>()

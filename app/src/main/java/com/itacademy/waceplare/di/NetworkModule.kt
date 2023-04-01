@@ -1,6 +1,11 @@
 package com.itacademy.waceplare.di
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import com.itacademy.waceplare.data.api.AuthApi
 import com.itacademy.waceplare.data.api.SearchApi
+import com.itacademy.waceplare.util.AuthTokenInterceptor
 import com.itacademy.waceplare.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -31,8 +36,11 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideClient(interceptor: HttpLoggingInterceptor): OkHttpClient =
-        OkHttpClient.Builder().addInterceptor(interceptor).build()
+    fun provideClient(interceptor: HttpLoggingInterceptor, authTokenInterceptor: AuthTokenInterceptor): OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .addInterceptor(authTokenInterceptor)
+            .build()
 
     @Provides
     @Singleton
@@ -41,7 +49,22 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideAuthTokenInterceptor(sharedPreferences: SharedPreferences): AuthTokenInterceptor =
+        AuthTokenInterceptor(sharedPreferences)
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(application: Application): SharedPreferences {
+        return application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    @Singleton
     fun provideSearchApi(retrofit: Retrofit): SearchApi = retrofit.create(SearchApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
 
 
 }

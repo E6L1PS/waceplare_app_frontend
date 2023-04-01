@@ -1,6 +1,6 @@
 package com.itacademy.waceplare.data.model.auth
 
-data class AuthRequest(
-    val username: String,
+data class AuthenticationRequest(
+    val email: String,
     val password: String
 )
