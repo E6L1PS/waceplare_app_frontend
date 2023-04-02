@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.itacademy.waceplare.R
-import com.itacademy.waceplare.data.model.Ad
+import com.itacademy.data.model.Ad
 import com.itacademy.waceplare.databinding.ItemAdBinding
 
 class AdsAdapter : RecyclerView.Adapter<AdsAdapter.AdsVH>() {

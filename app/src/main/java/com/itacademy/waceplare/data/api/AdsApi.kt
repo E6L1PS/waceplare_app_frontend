@@ -1,6 +1,6 @@
 package com.itacademy.waceplare.data.api
 
-import com.itacademy.waceplare.data.model.Ad
+import com.itacademy.data.model.Ad
 import com.itacademy.waceplare.domain.model.AdDTO
 import retrofit2.Response
 import retrofit2.http.Body

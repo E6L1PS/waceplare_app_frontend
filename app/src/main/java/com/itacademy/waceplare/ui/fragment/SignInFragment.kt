@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.waceplare.R
-import com.itacademy.waceplare.data.model.auth.AuthenticationRequest
+import com.itacademy.data.model.auth.AuthenticationRequest
 import com.itacademy.waceplare.databinding.FragmentSignInBinding
 import com.itacademy.waceplare.ui.view.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint

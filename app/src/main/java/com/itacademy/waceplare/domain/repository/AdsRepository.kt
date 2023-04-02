@@ -1,7 +1,6 @@
 package com.itacademy.waceplare.domain.repository
 
-import com.itacademy.waceplare.data.model.Ad
-import com.itacademy.waceplare.util.Resource
+import com.itacademy.data.model.Ad
 import kotlinx.coroutines.flow.Flow
 
 interface AdsRepository {

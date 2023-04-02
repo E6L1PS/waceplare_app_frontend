@@ -1,8 +1,6 @@
 package com.itacademy.waceplare.ui.fragment
 
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -24,7 +22,6 @@ import com.itacademy.waceplare.R
 import com.itacademy.waceplare.databinding.FragmentSearchBinding
 import com.itacademy.waceplare.ui.adapter.AdsAdapter
 import com.itacademy.waceplare.ui.view.SearchViewModel
-import com.itacademy.waceplare.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach

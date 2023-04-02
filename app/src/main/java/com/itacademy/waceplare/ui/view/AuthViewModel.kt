@@ -1,11 +1,10 @@
 package com.itacademy.waceplare.ui.view
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.itacademy.waceplare.data.model.auth.AuthResult
-import com.itacademy.waceplare.data.model.auth.AuthenticationRequest
-import com.itacademy.waceplare.data.repository.AuthRepositoryImpl
+import com.itacademy.data.model.auth.AuthResult
+import com.itacademy.data.model.auth.AuthenticationRequest
+import com.itacademy.data.repository.AuthDataDataRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +14,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val repository: AuthRepositoryImpl): ViewModel() {
+class AuthViewModel @Inject constructor(private val repository: AuthDataDataRepositoryImpl): ViewModel() {
 
     private val _isAuthenticated = MutableStateFlow(false)
     val isAuthenticated: StateFlow<Boolean> = _isAuthenticated.asStateFlow()

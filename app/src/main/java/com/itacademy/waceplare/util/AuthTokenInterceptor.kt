@@ -2,6 +2,7 @@ package com.itacademy.waceplare.util
 
 import android.content.SharedPreferences
 import android.util.Log
+import com.itacademy.data.util.Constants
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject

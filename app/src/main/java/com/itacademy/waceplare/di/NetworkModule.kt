@@ -3,11 +3,11 @@ package com.itacademy.waceplare.di
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.itacademy.waceplare.data.api.AdsApi
-import com.itacademy.waceplare.data.api.AuthApi
-import com.itacademy.waceplare.data.api.SearchApi
-import com.itacademy.waceplare.util.AuthTokenInterceptor
-import com.itacademy.waceplare.util.Constants
+import com.itacademy.data.api.AdsApi
+import com.itacademy.data.api.AuthApi
+import com.itacademy.data.api.SearchApi
+import com.itacademy.data.util.AuthTokenInterceptor
+import com.itacademy.data.util.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

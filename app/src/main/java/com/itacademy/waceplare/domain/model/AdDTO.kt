@@ -1,6 +1,6 @@
 package com.itacademy.waceplare.domain.model
 
-import com.itacademy.waceplare.data.model.Category
+import com.itacademy.data.model.Category
 
 data class AdDTO(
     val price: Int,

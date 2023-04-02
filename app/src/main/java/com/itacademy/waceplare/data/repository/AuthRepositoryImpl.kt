@@ -1,13 +1,12 @@
 package com.itacademy.waceplare.data.repository
 
 import android.content.SharedPreferences
-import android.util.Log
-import com.itacademy.waceplare.data.api.AuthApi
-import com.itacademy.waceplare.data.model.auth.AuthResult
-import com.itacademy.waceplare.data.model.auth.AuthenticationRequest
-import com.itacademy.waceplare.data.model.auth.RegisterRequest
+import com.itacademy.data.api.AuthApi
+import com.itacademy.data.model.auth.AuthResult
+import com.itacademy.data.model.auth.AuthenticationRequest
+import com.itacademy.data.model.auth.RegisterRequest
 import com.itacademy.waceplare.domain.repository.AuthRepository
-import com.itacademy.waceplare.util.Constants
+import com.itacademy.data.util.Constants
 import retrofit2.HttpException
 import javax.inject.Inject
 

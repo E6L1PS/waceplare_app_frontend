@@ -14,3 +14,12 @@ dependencyResolutionManagement {
 }
 rootProject.name = "digital-app-mobile"
 include ':app'
+include ':features:profile'
+include ':core:common'
+include ':data'
+include ':features:favorites'
+include ':features:search'
+include ':features:personal-ads'
+include ':features:sign-in'
+include ':features:sign-up'
+include ':core:theme'

@@ -1,5 +1,8 @@
 package com.itacademy.waceplare.data.model
 
+import com.itacademy.data.model.Category
+import com.itacademy.data.model.User
+
 data class Ad(
     val id: Long,
     val price: Int,

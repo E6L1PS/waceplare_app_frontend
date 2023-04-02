@@ -1,0 +1,48 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+}
+
+android {
+    namespace 'com.itacademy.data'
+    compileSdk target_android_sdk
+
+    defaultConfig {
+        minSdk min_android_sdk
+        targetSdk target_android_sdk
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation Libs.Squareup.Retrofit
+    implementation Libs.Squareup.Converter
+    implementation Libs.Squareup.Interceptor
+    implementation Libs.Google.Gson
+
+    implementation Libs.Google.Hilt
+    kapt Libs.Google.HiltCompiler
+
+    implementation Libs.Android.CoreKtx
+
+    implementation project(Modules.Core.Common)
+}

@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.itacademy.waceplare.ui.fragment.FavoritesFragment"
-        android:label="@string/favorites"
+        android:label="Избранное"
         tools:layout="@layout/fragment_favorites" />
 </navigation>

@@ -2,10 +2,9 @@ package com.itacademy.waceplare.ui.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.itacademy.waceplare.data.model.Ad
+import com.itacademy.data.model.Ad
 import com.itacademy.waceplare.domain.model.AdDTO
 import com.itacademy.waceplare.domain.repository.MyAdsRepository
-import com.itacademy.waceplare.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

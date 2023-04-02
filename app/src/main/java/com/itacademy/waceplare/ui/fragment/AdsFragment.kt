@@ -12,13 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.waceplare.R
-import com.itacademy.waceplare.data.model.Category
+import com.itacademy.data.model.Category
 import com.itacademy.waceplare.databinding.FragmentAdsBinding
 import com.itacademy.waceplare.domain.model.AdDTO
-import com.itacademy.waceplare.ui.adapter.AdsAdapter
 import com.itacademy.waceplare.ui.adapter.MyAdsAdapter
 import com.itacademy.waceplare.ui.view.MyAdsViewModel
-import com.itacademy.waceplare.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach

@@ -1,5 +1,7 @@
 package com.itacademy.waceplare.data.model.auth
 
+import com.itacademy.data.model.auth.AuthResult
+
 sealed class AuthResult<T>(val data: T? = null) {
     class Authorized<T>(data: T? = null): AuthResult<T>(data)
     class Unauthorized<T>: AuthResult<T>()

@@ -1,9 +1,8 @@
 package com.itacademy.waceplare.data.repository
 
-import com.itacademy.waceplare.data.api.SearchApi
-import com.itacademy.waceplare.data.model.Ad
+import com.itacademy.data.api.SearchApi
+import com.itacademy.data.model.Ad
 import com.itacademy.waceplare.domain.repository.AdsRepository
-import com.itacademy.waceplare.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
