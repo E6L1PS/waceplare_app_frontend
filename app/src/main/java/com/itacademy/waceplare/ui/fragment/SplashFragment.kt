@@ -2,19 +2,16 @@ package com.itacademy.waceplare.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.itacademy.sign_in.presentation.AuthViewModel
 import com.itacademy.waceplare.R
 import com.itacademy.waceplare.databinding.FragmentSplashBinding
 import com.itacademy.waceplare.ui.MainActivity
 import com.itacademy.waceplare.ui.MainActivityArgs
-import com.itacademy.waceplare.ui.view.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

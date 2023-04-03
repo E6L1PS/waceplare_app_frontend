@@ -1,21 +1,21 @@
 package com.itacademy.data.repository
 
 import android.content.SharedPreferences
+import com.itacademy.common.model.AuthResult
 import com.itacademy.data.AuthDataRepository
 import com.itacademy.data.api.AuthApi
-import com.itacademy.data.model.auth.AuthResult
-import com.itacademy.data.model.auth.AuthenticationRequest
-import com.itacademy.data.model.auth.RegisterRequest
 import com.itacademy.data.util.Constants
+import com.itacademy.sign_in.domain.model.AuthenticationRequest
+import com.itacademy.sign_in.domain.model.RegisterRequest
 import retrofit2.HttpException
 import javax.inject.Inject
 
 class AuthDataDataRepositoryImpl @Inject constructor(
     private val api: AuthApi,
     private val sharedPreferences: SharedPreferences
-): AuthDataRepository {
+) : AuthDataRepository {
 
-     override suspend fun signUp(registerRequest: RegisterRequest): AuthResult<Unit> {
+    override suspend fun signUp(registerRequest: RegisterRequest): AuthResult<Unit> {
         return try {
             val response = api.signUp(registerRequest)
             sharedPreferences.edit()
@@ -34,7 +34,7 @@ class AuthDataDataRepositoryImpl @Inject constructor(
         }
     }
 
-     override suspend fun signIn(authenticationRequest: AuthenticationRequest): AuthResult<Unit> {
+    override suspend fun signIn(authenticationRequest: AuthenticationRequest): AuthResult<Unit> {
         return try {
             val response = api.signIn(authenticationRequest)
 
@@ -54,7 +54,7 @@ class AuthDataDataRepositoryImpl @Inject constructor(
         }
     }
 
-     override suspend fun isAuthenticated(): AuthResult<Unit> {
+    override suspend fun isAuthenticated(): AuthResult<Unit> {
         return try {
             if (api.isAuthenticated()) {
                 AuthResult.Authorized()

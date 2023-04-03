@@ -77,9 +77,15 @@ dependencies {
 
     implementation project(Modules.Data)
 
-    implementation project(Modules.Features.SignIn)
-    implementation project(Modules.Features.Profile)
 
+    implementation project(Modules.Features.SignIn)
+    implementation project(Modules.Features.SignUp)
+    /* implementation project(Modules.Features.Search)
+     implementation project(Modules.Features.Favorites)
+     implementation project(Modules.Features.PersonalAds)
+     implementation project(Modules.Features.Messages)
+     implementation project(Modules.Features.Profile)
+ */
     implementation project(Modules.Core.Common)
 }
 

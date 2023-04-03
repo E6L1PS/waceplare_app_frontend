@@ -11,10 +11,11 @@ import com.itacademy.sign_in.R
 import com.itacademy.sign_in.databinding.FragmentSignInBinding
 import com.itacademy.sign_in.domain.model.AuthenticationRequest
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class SignInFragment : Fragment(R.layout.fragment_sign_in) {
+class SignInFragment @Inject constructor(private val router: SignInRouter) : Fragment(R.layout.fragment_sign_in) {
 
     private val binding by viewBinding<FragmentSignInBinding>()
     private val viewModel by viewModels<AuthViewModel>()
@@ -32,16 +33,15 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 )
 
             }
-/*
             lifecycleScope.launchWhenStarted {
                 viewModel.isAuthenticated.collect { isAuthenticated ->
                     if (isAuthenticated) {
                         Log.d("isAuthenticated", "navvv")
-
+                        router.launchMain(this@SignInFragment)
                         //findNavController().navigate(R.id.action_signInFragment_to_tabsFragment)
                     }
                 }
-            }*/
+            }
 
 
         }

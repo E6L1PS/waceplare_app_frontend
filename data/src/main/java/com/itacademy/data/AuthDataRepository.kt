@@ -1,8 +1,9 @@
 package com.itacademy.data
 
-import com.itacademy.data.model.auth.AuthResult
-import com.itacademy.data.model.auth.AuthenticationRequest
-import com.itacademy.data.model.auth.RegisterRequest
+import com.itacademy.common.model.AuthResult
+import com.itacademy.sign_in.domain.model.AuthenticationRequest
+import com.itacademy.sign_in.domain.model.RegisterRequest
+
 
 interface AuthDataRepository {
     suspend fun signIn(authenticationRequest: AuthenticationRequest): AuthResult<Unit>

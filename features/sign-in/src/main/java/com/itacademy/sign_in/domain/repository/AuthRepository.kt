@@ -1,6 +1,6 @@
 package com.itacademy.sign_in.domain.repository
 
-import com.itacademy.sign_in.domain.model.AuthResult
+import com.itacademy.common.model.AuthResult
 import com.itacademy.sign_in.domain.model.AuthenticationRequest
 import com.itacademy.sign_in.domain.model.RegisterRequest
 

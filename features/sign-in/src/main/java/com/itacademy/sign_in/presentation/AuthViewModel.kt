@@ -2,7 +2,7 @@ package com.itacademy.sign_in.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.itacademy.sign_in.domain.model.AuthResult
+import com.itacademy.common.model.AuthResult
 import com.itacademy.sign_in.domain.model.AuthenticationRequest
 import com.itacademy.sign_in.domain.usecase.SignInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -45,7 +45,6 @@ class AuthViewModel @Inject constructor(
             _isAuthenticated.emit(
                 when (signInUseCase.signIn(authenticationRequest)) {
                     is AuthResult.Authorized -> {
-                        router.launchMain()
                         true
                     }
                     else -> false

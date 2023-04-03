@@ -51,9 +51,6 @@ buildscript {
                 ],
                 Other: [
                         ViewBindingDelegate: "com.github.kirich1409:viewbindingpropertydelegate-full:1.5.8",
-                        ElementAdapter: "com.elveum:element-adapter:0.6",
-                        Coil: "io.coil-kt:coil:2.2.0",
-                        Faker: "com.github.javafaker:javafaker:1.0.2",
                 ],
         ]
 
@@ -61,8 +58,6 @@ buildscript {
                 Data: ":data",
                 Core: [
                         Common: ":core:common",
-                        CommonImpl: ":core:common-impl",
-                        Presentation: ":core:presentation",
                         Theme: ":core:theme",
                 ],
                 Features: [
@@ -71,11 +66,8 @@ buildscript {
                         Search: ":features:search",
                         Favorites: ":features:favorites",
                         PersonalAds: ":features:personal-ads",
+                        Messages: ":features:messages",
                         Profile: ":features:profile",
-
-                        Cart: ":features:cart",
-                        Orders: ":features:orders",
-                        Catalog: ":features:catalog"
                 ],
         ]
 

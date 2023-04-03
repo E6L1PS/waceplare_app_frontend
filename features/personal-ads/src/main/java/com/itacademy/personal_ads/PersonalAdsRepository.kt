@@ -1,0 +1,11 @@
+package com.itacademy.personal_ads
+
+import com.itacademy.common.Resource
+import com.itacademy.personal_ads.domain.model.Ad
+import com.itacademy.personal_ads.domain.model.AdDTO
+import kotlinx.coroutines.flow.Flow
+
+interface PersonalAdsRepository {
+    suspend fun getAds(): Flow<Resource<List<Ad>?>>
+    suspend fun postAd(ad: AdDTO)
+}
