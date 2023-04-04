@@ -1,7 +1,7 @@
 package com.itacademy.search
 
 import com.itacademy.common.Resource
-import com.itacademy.search.domain.model.Ad
+import com.itacademy.common.model.Ad
 import kotlinx.coroutines.flow.Flow
 
 interface AdsRepository {

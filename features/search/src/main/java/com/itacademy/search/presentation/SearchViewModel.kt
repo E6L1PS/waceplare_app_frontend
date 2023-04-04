@@ -3,7 +3,7 @@ package com.itacademy.search.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.itacademy.common.Resource
-import com.itacademy.search.domain.model.Ad
+import com.itacademy.common.model.Ad
 import com.itacademy.search.domain.usecase.SearchAdsByTitleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

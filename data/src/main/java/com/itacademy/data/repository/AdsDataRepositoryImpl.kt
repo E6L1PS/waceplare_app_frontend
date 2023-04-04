@@ -1,9 +1,9 @@
 package com.itacademy.data.repository
 
 import com.itacademy.common.Resource
+import com.itacademy.common.model.Ad
 import com.itacademy.data.AdsDataRepository
 import com.itacademy.data.api.SearchApi
-import com.itacademy.data.model.Ad
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

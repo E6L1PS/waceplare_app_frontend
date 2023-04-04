@@ -1,5 +1,6 @@
 package com.itacademy.sign_in.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.itacademy.common.model.AuthResult
@@ -15,13 +16,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val signInUseCase: SignInUseCase,
-    private val router: SignInRouter,
+    private val signInUseCase: SignInUseCase
 ): ViewModel() {
 
 
-    private val _isAuthenticated = MutableStateFlow(false)
-    val isAuthenticated: StateFlow<Boolean> = _isAuthenticated.asStateFlow()
+    private val _isAuthenticated =  MutableStateFlow<AuthResult<Boolean>>(AuthResult.UnknownError())
+    val isAuthenticated: StateFlow<AuthResult<Boolean>> = _isAuthenticated.asStateFlow()
 
     init {
         isAuthorized()
@@ -30,11 +30,14 @@ class AuthViewModel @Inject constructor(
 
     fun isAuthorized() {
 
+        Log.d("AuthTEST", "called")
+
         viewModelScope.launch {
             _isAuthenticated.emit(
                 when (signInUseCase.isAuthenticated()) {
-                    is AuthResult.Authorized -> true
-                    else -> false
+                    is AuthResult.Authorized -> AuthResult.Authorized(true)
+                    is AuthResult.Unauthorized -> AuthResult.Unauthorized()
+                    is AuthResult.UnknownError -> AuthResult.UnknownError()
                 }
             )
         }
@@ -44,10 +47,9 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             _isAuthenticated.emit(
                 when (signInUseCase.signIn(authenticationRequest)) {
-                    is AuthResult.Authorized -> {
-                        true
-                    }
-                    else -> false
+                    is AuthResult.Authorized -> AuthResult.Authorized(true)
+                    is AuthResult.Unauthorized -> AuthResult.Unauthorized()
+                    is AuthResult.UnknownError -> AuthResult.UnknownError()
                 }
             )
         }

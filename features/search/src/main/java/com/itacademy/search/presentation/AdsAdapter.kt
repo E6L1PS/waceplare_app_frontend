@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.itacademy.common.model.Ad
 import com.itacademy.search.R
 import com.itacademy.search.databinding.ItemAdBinding
-import com.itacademy.search.domain.model.Ad
 
 class AdsAdapter : RecyclerView.Adapter<AdsAdapter.AdsVH>() {
 

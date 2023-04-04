@@ -25,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 
+
 @AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTextListener,
     MenuProvider {

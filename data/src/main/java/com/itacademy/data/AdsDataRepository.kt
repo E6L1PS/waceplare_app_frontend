@@ -1,7 +1,7 @@
 package com.itacademy.data
 
 import com.itacademy.common.Resource
-import com.itacademy.data.model.Ad
+import com.itacademy.common.model.Ad
 import kotlinx.coroutines.flow.Flow
 
 interface AdsDataRepository {

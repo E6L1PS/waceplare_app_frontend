@@ -1,8 +1,8 @@
 package com.itacademy.data
 
 import com.itacademy.common.Resource
-import com.itacademy.data.model.Ad
-import com.itacademy.data.model.AdDTO
+import com.itacademy.common.model.Ad
+import com.itacademy.common.model.AdDTO
 import kotlinx.coroutines.flow.Flow
 
 interface PersonalAdsDataRepository {

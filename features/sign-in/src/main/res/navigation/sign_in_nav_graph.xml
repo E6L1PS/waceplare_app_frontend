@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sign_in_nav_graph"
+    app:startDestination="@id/signInFragment">
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.itacademy.sign_in.presentation.SignInFragment"
+        android:label="SignInFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="waceplare://login" />
+    </fragment>
+</navigation>

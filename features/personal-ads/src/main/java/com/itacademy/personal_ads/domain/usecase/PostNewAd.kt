@@ -1,7 +1,7 @@
 package com.itacademy.personal_ads.domain.usecase
 
+import com.itacademy.common.model.AdDTO
 import com.itacademy.personal_ads.PersonalAdsRepository
-import com.itacademy.personal_ads.domain.model.AdDTO
 import javax.inject.Inject
 
 class PostNewAd @Inject constructor(

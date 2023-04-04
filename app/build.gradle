@@ -47,6 +47,7 @@ hilt {
 }
 
 dependencies {
+
     // Hilt
     implementation 'androidx.annotation:annotation:1.6.0'
 
@@ -58,14 +59,6 @@ dependencies {
 
     implementation Libs.Google.Hilt
     kapt Libs.Google.HiltCompiler
-
-    implementation Libs.Squareup.Retrofit
-    implementation Libs.Squareup.Converter
-    implementation Libs.Squareup.Interceptor
-    implementation Libs.Google.Gson
-
-    implementation Libs.JetBrains.CoroutinesCore
-    implementation Libs.JetBrains.CoroutinesAndroid
 
     implementation Libs.Android.LifecycleViewModelKtx
 
@@ -80,12 +73,14 @@ dependencies {
 
     implementation project(Modules.Features.SignIn)
     implementation project(Modules.Features.SignUp)
-    /* implementation project(Modules.Features.Search)
-     implementation project(Modules.Features.Favorites)
-     implementation project(Modules.Features.PersonalAds)
-     implementation project(Modules.Features.Messages)
-     implementation project(Modules.Features.Profile)
- */
+
+    implementation project(Modules.Features.Search)
+    implementation project(Modules.Features.Favorites)
+    implementation project(Modules.Features.PersonalAds)
+    implementation project(Modules.Features.Messages)
+    implementation project(Modules.Features.Profile)
+
+    implementation project(Modules.Core.Navigation)
     implementation project(Modules.Core.Common)
 }
 

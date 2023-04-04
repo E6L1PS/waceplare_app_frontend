@@ -1,7 +1,7 @@
 package com.itacademy.data.api
 
-import com.itacademy.data.model.Ad
-import com.itacademy.data.model.AdDTO
+import com.itacademy.common.model.Ad
+import com.itacademy.common.model.AdDTO
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

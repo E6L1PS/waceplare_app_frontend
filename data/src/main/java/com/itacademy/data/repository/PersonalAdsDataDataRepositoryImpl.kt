@@ -1,10 +1,10 @@
 package com.itacademy.data.repository
 
 import com.itacademy.common.Resource
+import com.itacademy.common.model.Ad
+import com.itacademy.common.model.AdDTO
 import com.itacademy.data.PersonalAdsDataRepository
 import com.itacademy.data.api.AdsApi
-import com.itacademy.data.model.Ad
-import com.itacademy.data.model.AdDTO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

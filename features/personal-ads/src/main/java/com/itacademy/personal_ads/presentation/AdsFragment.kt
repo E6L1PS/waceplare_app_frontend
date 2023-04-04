@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.common.Resource
+import com.itacademy.common.model.AdDTO
+import com.itacademy.common.model.Category
 import com.itacademy.personal_ads.R
 import com.itacademy.personal_ads.databinding.FragmentAdsBinding
-import com.itacademy.personal_ads.domain.model.AdDTO
-import com.itacademy.personal_ads.domain.model.Category
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach

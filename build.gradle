@@ -57,6 +57,7 @@ buildscript {
         Modules = [
                 Data: ":data",
                 Core: [
+                        Navigation: ":core:navigation",
                         Common: ":core:common",
                         Theme: ":core:theme",
                 ],

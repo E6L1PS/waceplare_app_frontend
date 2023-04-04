@@ -3,23 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/search_navigation"
+        android:id="@+id/search_nav_graph"
         android:icon="@drawable/manage_search_ic"
         android:title="@string/Search" />
     <item
-        android:id="@+id/favorites_navigation"
+        android:id="@+id/favorites_nav_graph"
         android:icon="@drawable/favorite_ic"
         android:title="@string/Favorite" />
     <item
-        android:id="@+id/ads_navigation"
+        android:id="@+id/personal_ads_nav_graph"
         android:icon="@drawable/post_add_ic"
         android:title="@string/Ads" />
     <item
-        android:id="@+id/messages_navigation"
+        android:id="@+id/messages_nav_graph"
         android:icon="@drawable/message_ic"
         android:title="@string/Messages" />
     <item
-        android:id="@+id/profile_navigation"
+        android:id="@+id/profile_nav_graph"
         android:icon="@drawable/person_ic"
         android:title="@string/Profile" />
 

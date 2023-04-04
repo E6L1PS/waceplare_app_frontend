@@ -1,17 +1,22 @@
 package com.itacademy.waceplare.ui.fragment
 
-import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.itacademy.common.model.AuthResult
+import com.itacademy.navigation.NavCommand
+import com.itacademy.navigation.NavCommands
+import com.itacademy.navigation.navigate
 import com.itacademy.sign_in.presentation.AuthViewModel
 import com.itacademy.waceplare.R
 import com.itacademy.waceplare.databinding.FragmentSplashBinding
-import com.itacademy.waceplare.ui.MainActivity
-import com.itacademy.waceplare.ui.MainActivityArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,20 +28,40 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        requireActivity().setTheme(R.style.AppTheme_Splash)
+
         lifecycleScope.launchWhenStarted {
             viewModel.isAuthenticated.collect { isAuthenticated ->
-                launchMainScreen(isAuthenticated)
+                when (isAuthenticated) {
+                    is AuthResult.Authorized -> {
+                        view.postDelayed({
+                            Log.d("AuthTEST", isAuthenticated.toString())
+                            findNavController().navigate(R.id.action_splashFragment_to_tabsFragment)
+                        }, 1000)
+
+                    }
+                    is AuthResult.Unauthorized -> {
+                        Log.d("AuthTEST", isAuthenticated.toString())
+                        view.postDelayed({
+                        navigate(
+                            NavCommand(
+                                NavCommands.DeepLink(
+                                    url = Uri.parse("waceplare://login"),
+                                    isModal = true,
+                                    isSingleTop = true
+                                )
+                            )
+                        ) }, 1000)
+                    }
+                    is AuthResult.UnknownError -> {
+                        Log.d("AuthTEST", isAuthenticated.toString())
+
+                    }
+
+                }
             }
         }
+
+
     }
-    private fun launchMainScreen(isSignedIn: Boolean) {
-        val intent = Intent(requireContext(), MainActivity::class.java)
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-
-        val args = MainActivityArgs(isSignedIn)
-        intent.putExtra("isSignedIn", args.toBundle())
-        startActivity(intent)
-    }
-
 }

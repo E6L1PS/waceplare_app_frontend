@@ -18,18 +18,18 @@ class AuthTokenInterceptor @Inject constructor(
         Log.i("okHttp.JWT", token.toString())
         Log.i("okHttp.JWT", request.url.encodedPath)
         val authenticatedRequest = if (isAuthRequired(request.url.encodedPath) && token != null) {
-            Log.i("okHttp.JWT", request.url.toString())
+            Log.i("okHttp.JWT", "Запрос с токеном")
             request.newBuilder()
                 .addHeader("Authorization", "Bearer $token")
                 .build()
         } else {
+            Log.d("okHttp.JWT", "Запрос без токена")
             request
         }
         return chain.proceed(authenticatedRequest)
     }
 
     private fun isAuthRequired(url: String): Boolean {
-        Log.d("okHttp.JWT", Constants.excludedUrls.contains(url).toString())
         // Проверяем, нужно ли добавлять токен к текущему URL
         return !Constants.excludedUrls.contains(url)
     }
