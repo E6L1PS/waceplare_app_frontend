@@ -2,7 +2,6 @@ package com.itacademy.waceplare.ui.fragment
 
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -43,15 +42,16 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
                     is AuthResult.Unauthorized -> {
                         Log.d("AuthTEST", isAuthenticated.toString())
                         view.postDelayed({
-                        navigate(
-                            NavCommand(
-                                NavCommands.DeepLink(
-                                    url = Uri.parse("waceplare://login"),
-                                    isModal = true,
-                                    isSingleTop = true
+                            navigate(
+                                NavCommand(
+                                    NavCommands.DeepLink(
+                                        url = Uri.parse("waceplare://login"),
+                                        isModal = true,
+                                        isSingleTop = true
+                                    )
                                 )
                             )
-                        ) }, 1000)
+                        }, 1000)
                     }
                     is AuthResult.UnknownError -> {
                         Log.d("AuthTEST", isAuthenticated.toString())

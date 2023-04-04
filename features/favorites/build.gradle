@@ -40,16 +40,9 @@ dependencies {
 
     kapt Libs.Google.HiltCompiler
     implementation Libs.Google.Hilt
-
-    implementation Libs.Google.Material
-
+    
     implementation Libs.Android.LifecycleViewModelKtx
     implementation Libs.Android.FragmentKtx
-    implementation Libs.Android.AppCompat
-    implementation Libs.Android.CoreKtx
-
-    implementation Libs.Android.NavigationFragments
-    implementation Libs.Android.NavigationUI
 
     implementation project(Modules.Core.Navigation)
     implementation project(Modules.Core.Common)

@@ -3,7 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -47,33 +46,15 @@ hilt {
 }
 
 dependencies {
-
-    // Hilt
-    implementation 'androidx.annotation:annotation:1.6.0'
-
-    // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
     implementation Libs.Other.ViewBindingDelegate
 
     implementation Libs.Google.Hilt
     kapt Libs.Google.HiltCompiler
 
-    implementation Libs.Android.LifecycleViewModelKtx
-
-    implementation Libs.Android.CoreKtx
-    implementation Libs.Android.AppCompat
-    implementation Libs.Android.ConstraintLayout
-
-    implementation Libs.Google.Material
-
     implementation project(Modules.Data)
-
 
     implementation project(Modules.Features.SignIn)
     implementation project(Modules.Features.SignUp)
-
     implementation project(Modules.Features.Search)
     implementation project(Modules.Features.Favorites)
     implementation project(Modules.Features.PersonalAds)
@@ -82,6 +63,7 @@ dependencies {
 
     implementation project(Modules.Core.Navigation)
     implementation project(Modules.Core.Common)
+    implementation project(Modules.Core.Theme)
 }
 
 

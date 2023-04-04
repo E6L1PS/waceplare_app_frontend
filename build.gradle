@@ -17,6 +17,7 @@ buildscript {
 
         Libs = [
                 Android: [
+                        Annotation: "androidx.annotation:annotation:1.6.0",
                         CoreKtx: "androidx.core:core-ktx:1.9.0",
                         FragmentKtx: "androidx.fragment:fragment-ktx:1.5.5",
                         ActivityKtx: "androidx.activity:activity-ktx:1.6.1",
@@ -72,20 +73,11 @@ buildscript {
                 ],
         ]
 
-
-
-
-
-
-    }
-
-    dependencies {
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 
 plugins {
+    id 'androidx.navigation.safeargs' version "$nav_version" apply false
     id 'com.google.dagger.hilt.android' version "$hilt_version" apply false
     id 'com.android.application' version '7.4.1' apply false
     id 'com.android.library' version '7.4.1' apply false
