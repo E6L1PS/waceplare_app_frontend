@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.itacademy.common.Resource
 import com.itacademy.common.model.AuthResult
 import com.itacademy.navigation.NavCommand
 import com.itacademy.navigation.NavCommands
@@ -34,12 +35,12 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                         tiEtPassword.text.toString()
                     )
                 )
-
             }
+
             lifecycleScope.launchWhenStarted {
                 viewModel.isAuthenticated.collect { isAuthenticated ->
                     when (isAuthenticated) {
-                        is AuthResult.Authorized -> {
+                        is Resource.Success -> {
                             navigate(
                                 NavCommand(
                                     NavCommands.DeepLink(
@@ -50,10 +51,10 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                                 )
                             )
                         }
-                        is AuthResult.Unauthorized -> {
+                        is Resource.Error -> {
 
                         }
-                        is AuthResult.UnknownError -> {
+                        is Resource.Loading -> {
 
                         }
 

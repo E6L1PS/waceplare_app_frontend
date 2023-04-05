@@ -26,4 +26,13 @@
             android:id="@+id/deepLink2"
             app:uri="waceplare://main" />
     </fragment>
+    <fragment
+        android:id="@+id/createAdFragment"
+        android:name="com.itacademy.personal_ads.presentation.CreateAdFragment"
+        android:label="CreateAdFragment">
+        <deepLink
+            android:id="@+id/deepLink4"
+            app:uri="waceplare://new" />
+    </fragment>
+
 </navigation>

@@ -3,6 +3,7 @@ package com.itacademy.waceplare.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavHost
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -24,5 +25,8 @@ class TabsFragment : Fragment(R.layout.fragment_tabs) {
 
         setupWithNavController(binding.bnv, navController)
 
+
+
     }
+
 }

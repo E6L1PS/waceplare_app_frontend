@@ -8,4 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface PersonalAdsDataRepository {
     suspend fun getAds(): Flow<Resource<List<Ad>?>>
     suspend fun postAd(ad: AdDTO)
+    suspend fun deleteAd(adId: Long)
+    suspend fun hideAd(adId: Long)
+    suspend fun showAd(adId: Long)
 }

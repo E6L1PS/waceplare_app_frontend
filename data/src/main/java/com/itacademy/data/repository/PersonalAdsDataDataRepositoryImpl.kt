@@ -33,7 +33,41 @@ class PersonalAdsDataDataRepositoryImpl @Inject constructor(
 
 
     override suspend fun postAd(ad: AdDTO) {
-        api.postAd(ad)
+        val response = api.postAd(ad)
+        if (response.isSuccessful) {
+            Resource.success(response.body())
+        } else {
+            Resource.error(response.message(), null)
+        }
     }
+
+    override suspend fun deleteAd(adId: Long) {
+        val response = api.deleteAd(adId)
+        if (response.isSuccessful) {
+            Resource.success(response.body())
+        } else {
+            Resource.error(response.message(), null)
+        }
+    }
+
+    override suspend fun hideAd(adId: Long) {
+        val response = api.hideAd(adId)
+        if (response.isSuccessful) {
+            Resource.success(response.body())
+        } else {
+            Resource.error(response.message(), null)
+        }
+    }
+
+    override suspend fun showAd(adId: Long) {
+        val response = api.showAd(adId)
+        if (response.isSuccessful) {
+            Resource.success(response.body())
+        } else {
+            Resource.error(response.message(), null)
+        }
+    }
+
+
 
 }

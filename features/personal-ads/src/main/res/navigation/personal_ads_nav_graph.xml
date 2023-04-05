@@ -9,4 +9,8 @@
         android:name="com.itacademy.personal_ads.presentation.AdsFragment"
         android:label="fragment_ads"
         tools:layout="@layout/fragment_ads" />
+    <fragment
+        android:id="@+id/hideAdsFragment"
+        android:name="com.itacademy.personal_ads.presentation.HideAdsFragment"
+        android:label="HideAdsFragment" />
 </navigation>

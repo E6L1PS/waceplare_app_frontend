@@ -1,14 +1,17 @@
 package com.itacademy.waceplare.ui.fragment
 
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.itacademy.common.Resource
 import com.itacademy.common.model.AuthResult
 import com.itacademy.navigation.NavCommand
 import com.itacademy.navigation.NavCommands
@@ -26,20 +29,19 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         requireActivity().setTheme(R.style.AppTheme_Splash)
 
         lifecycleScope.launchWhenStarted {
             viewModel.isAuthenticated.collect { isAuthenticated ->
                 when (isAuthenticated) {
-                    is AuthResult.Authorized -> {
+                    is Resource.Success -> {
                         view.postDelayed({
                             Log.d("AuthTEST", isAuthenticated.toString())
                             findNavController().navigate(R.id.action_splashFragment_to_tabsFragment)
                         }, 1000)
 
                     }
-                    is AuthResult.Unauthorized -> {
+                    is Resource.Error -> {
                         Log.d("AuthTEST", isAuthenticated.toString())
                         view.postDelayed({
                             navigate(
@@ -53,7 +55,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
                             )
                         }, 1000)
                     }
-                    is AuthResult.UnknownError -> {
+                    is Resource.Loading -> {
                         Log.d("AuthTEST", isAuthenticated.toString())
 
                     }

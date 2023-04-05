@@ -1,6 +1,7 @@
 package com.itacademy.data.repository
 
 import android.content.SharedPreferences
+import com.itacademy.common.Resource
 import com.itacademy.common.model.AuthResult
 import com.itacademy.data.AuthDataRepository
 import com.itacademy.data.api.AuthApi
@@ -15,60 +16,74 @@ class AuthDataDataRepositoryImpl @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : AuthDataRepository {
 
-    override suspend fun signUp(registerRequest: RegisterRequest): AuthResult<Unit> {
+    override suspend fun signUp(registerRequest: RegisterRequest): Resource<Unit> {
         return try {
             val response = api.signUp(registerRequest)
-            sharedPreferences.edit()
-                .putString("jwt_token", response.token)
-                .apply()
 
-            AuthResult.Authorized()
+            if (response.isSuccessful) {
+                sharedPreferences.edit()
+                    .putString(Constants.JWT_KEY, response.body()?.token)
+                    .apply()
+                Resource.success(Unit)
+            } else {
+                Resource.error(response.message(), null)
+            }
+
         } catch (e: HttpException) {
             if (e.code() == 403 || e.code() == 401) {
-                AuthResult.Unauthorized()
+
+                Resource.error(e.message(), null)
             } else {
-                AuthResult.UnknownError()
+                Resource.error(e.message(), null)
             }
         } catch (e: Exception) {
-            AuthResult.UnknownError()
+            Resource.error(e.toString(), null)
         }
     }
 
-    override suspend fun signIn(authenticationRequest: AuthenticationRequest): AuthResult<Unit> {
+    override suspend fun signIn(authenticationRequest: AuthenticationRequest): Resource<Unit> {
         return try {
             val response = api.signIn(authenticationRequest)
-
             sharedPreferences.edit()
-                .putString(Constants.JWT_KEY, response.token)
+                .putString(Constants.JWT_KEY, response.body()?.token)
                 .apply()
 
-            AuthResult.Authorized()
+            if (response.isSuccessful) {
+
+                Resource.success(Unit)
+            } else {
+                Resource.error(response.message(), null)
+            }
         } catch (e: HttpException) {
             if (e.code() == 403 || e.code() == 401) {
-                AuthResult.Unauthorized()
+
+                Resource.error(e.message(), null)
             } else {
-                AuthResult.UnknownError()
+                Resource.error(e.message(), null)
             }
         } catch (e: Exception) {
-            AuthResult.UnknownError()
+            Resource.error(e.toString(), null)
         }
     }
 
-    override suspend fun isAuthenticated(): AuthResult<Unit> {
+    override suspend fun isAuthenticated(): Resource<Unit> {
         return try {
-            if (api.isAuthenticated()) {
-                AuthResult.Authorized()
+            val response = api.isAuthenticated()
+
+            if (response.isSuccessful) {
+                Resource.success(Unit)
             } else {
-                AuthResult.Unauthorized()
+                Resource.error(response.message(), null)
             }
         } catch (e: HttpException) {
             if (e.code() == 403 || e.code() == 401) {
-                AuthResult.Unauthorized()
+
+                Resource.error(e.message(), null)
             } else {
-                AuthResult.UnknownError()
+                Resource.error(e.message(), null)
             }
         } catch (e: Exception) {
-            AuthResult.UnknownError()
+            Resource.error(e.toString(), null)
         }
     }
 }

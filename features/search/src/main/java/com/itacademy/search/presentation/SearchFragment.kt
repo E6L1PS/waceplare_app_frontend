@@ -33,13 +33,14 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
     private lateinit var adsAdapter: AdsAdapter
     private val viewModel by viewModels<SearchViewModel>()
     private val binding by viewBinding<FragmentSearchBinding>()
-    private val menuHost: MenuHost get() = requireActivity()
+    private val menuHost: MenuHost
+        get() = requireActivity()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRV()
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        setupRV()
 
         lifecycleScope.launchWhenStarted {
             viewModel.ads

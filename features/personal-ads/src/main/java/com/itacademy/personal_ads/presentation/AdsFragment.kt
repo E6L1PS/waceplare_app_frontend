@@ -1,5 +1,6 @@
 package com.itacademy.personal_ads.presentation
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -14,6 +15,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.common.Resource
 import com.itacademy.common.model.AdDTO
 import com.itacademy.common.model.Category
+import com.itacademy.navigation.NavCommand
+import com.itacademy.navigation.NavCommands
+import com.itacademy.navigation.navigate
 import com.itacademy.personal_ads.R
 import com.itacademy.personal_ads.databinding.FragmentAdsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,14 +39,23 @@ class AdsFragment : Fragment(R.layout.fragment_ads) {
             with(binding) {
                 btnEnter.setOnClickListener {
                     // TODO create a new fragment for post ad
-                    viewModel.postAd(
+                    navigate(
+                        NavCommand(
+                            NavCommands.DeepLink(
+                                url = Uri.parse("waceplare://new"),
+                                isModal = true,
+                                isSingleTop = true
+                            )
+                        )
+                    )
+                    /*viewModel.postAd(
                         ad = AdDTO(
                             120,
                             "title",
                             "desc",
                             category = Category(1, "Transport")
                         )
-                    )
+                    )*/
                 }
             }
         }
@@ -89,6 +102,12 @@ class AdsFragment : Fragment(R.layout.fragment_ads) {
             addItemDecoration(divider)
             layoutManager = LinearLayoutManager(activity)
             adapter = adsAdapter
+        }
+    }
+
+    companion object {
+        fun newInstance(): AdsFragment {
+            return AdsFragment()
         }
     }
 }
