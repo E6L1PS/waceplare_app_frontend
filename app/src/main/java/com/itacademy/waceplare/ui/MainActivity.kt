@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationProvider {
 
     private fun openDeepLink(url: Uri, isModal: Boolean, isSingleTop: Boolean) {
         val navOptions = if (isModal) {
+            //TODO anim for modal
             NavOptions.Builder()
                 .setEnterAnim(androidx.navigation.ui.R.anim.nav_default_enter_anim)
                 .setExitAnim(androidx.navigation.ui.R.anim.nav_default_exit_anim)

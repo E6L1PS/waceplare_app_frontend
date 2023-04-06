@@ -1,13 +1,16 @@
 package com.itacademy.personal_ads.presentation
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,15 +42,17 @@ class AdsFragment : Fragment(R.layout.fragment_ads) {
             with(binding) {
                 btnEnter.setOnClickListener {
                     // TODO create a new fragment for post ad
+
+                   //findNavController().navigate(R.id.action_adsFragment_to_createAdFragment)
+
                     navigate(
                         NavCommand(
                             NavCommands.DeepLink(
-                                url = Uri.parse("waceplare://new"),
-                                isModal = true,
-                                isSingleTop = true
+                                url = Uri.parse("waceplare://new")
                             )
                         )
                     )
+
                     /*viewModel.postAd(
                         ad = AdDTO(
                             120,

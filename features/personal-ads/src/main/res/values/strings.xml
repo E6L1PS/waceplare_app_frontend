@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="next">Продолжить</string>
+    <string name="specify_name">Укажите название</string>
+    <string name="enter_hint">Введите значение</string>
+</resources>

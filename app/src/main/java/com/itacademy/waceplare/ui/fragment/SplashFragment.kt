@@ -48,7 +48,6 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
                                 NavCommand(
                                     NavCommands.DeepLink(
                                         url = Uri.parse("waceplare://login"),
-                                        isModal = true,
                                         isSingleTop = true
                                     )
                                 )

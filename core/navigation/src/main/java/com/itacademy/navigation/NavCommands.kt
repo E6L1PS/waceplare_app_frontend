@@ -5,7 +5,7 @@ import android.net.Uri
 sealed class NavCommands {
     data class Browser(val url: String) : NavCommands()
     data class DeepLink(val url: Uri,
-                        val isModal: Boolean,
+                        val isModal: Boolean = false,
                         val isSingleTop: Boolean = false
     ) : NavCommands()
 }

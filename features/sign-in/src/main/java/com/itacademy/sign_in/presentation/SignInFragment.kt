@@ -45,7 +45,6 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                                 NavCommand(
                                     NavCommands.DeepLink(
                                         url = Uri.parse("waceplare://main"),
-                                        isModal = true,
                                         isSingleTop = true
                                     )
                                 )
