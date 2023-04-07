@@ -4,5 +4,6 @@ data class AdDTO(
     val price: Int,
     val title: String,
     val description: String,
-    val category: Category
+    val type: TypeAd,
+    val state: StateAd?
 )

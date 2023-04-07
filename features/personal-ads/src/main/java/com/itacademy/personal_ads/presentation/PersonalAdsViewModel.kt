@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.itacademy.common.Resource
 import com.itacademy.common.model.Ad
-import com.itacademy.common.model.AdDTO
+import com.itacademy.personal_ads.domain.model.AdDTO
 import com.itacademy.personal_ads.domain.usecase.GetPersonalAds
 import com.itacademy.personal_ads.domain.usecase.PostNewAd
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +23,6 @@ class PersonalAdsViewModel @Inject constructor(
 
     private val _ads = MutableStateFlow<Resource<List<Ad>?>>(Resource.loading(null))
     val ads: StateFlow<Resource<List<Ad>?>> = _ads.asStateFlow()
-
 
     init {
         getAds()

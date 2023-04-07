@@ -35,13 +35,23 @@
             android:id="@+id/deepLink4"
             app:uri="waceplare://new" />
     </fragment>
+
+
+    <fragment
+        android:id="@+id/stateAdFragment"
+        android:name="com.itacademy.personal_ads.presentation.create_ad_screens.StateAdFragment"
+        android:label="StateAdFragment">
+        <deepLink
+            android:id="@+id/deepLink5"
+            app:uri="waceplare://state_ad" />
+    </fragment>
+
     <fragment
         android:id="@+id/namingAdFragment"
         android:name="com.itacademy.personal_ads.presentation.create_ad_screens.NamingAdFragment"
         android:label="NamingAdFragment">
         <deepLink
             android:id="@+id/deepLink3"
-            app:uri="waceplare://naming_ad" />
+            app:uri="waceplare://naming_ad/{type}" />
     </fragment>
-
 </navigation>

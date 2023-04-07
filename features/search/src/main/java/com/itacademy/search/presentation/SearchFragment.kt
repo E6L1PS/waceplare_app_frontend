@@ -79,6 +79,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
         ResourcesCompat.getDrawable(resources, com.itacademy.theme.R.drawable.divider, null)?.let {
             divider.setDrawable(it)
         }
+
         adsAdapter = AdsAdapter()
         binding.recyclerView.apply {
             addItemDecoration(divider)

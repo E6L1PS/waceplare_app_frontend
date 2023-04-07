@@ -2,9 +2,11 @@ package com.itacademy.waceplare.glue.personal_ads
 
 import com.itacademy.common.Resource
 import com.itacademy.common.model.Ad
-import com.itacademy.common.model.AdDTO
+import com.itacademy.common.model.StateAd
+import com.itacademy.common.model.TypeAd
 import com.itacademy.data.PersonalAdsDataRepository
 import com.itacademy.personal_ads.PersonalAdsRepository
+import com.itacademy.personal_ads.domain.model.AdDTO
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -17,7 +19,13 @@ class AdapterPersonalAdsRepository @Inject constructor(
     }
 
     override suspend fun postAd(ad: AdDTO) {
-        personalAdsDataRepository.postAd(ad)
+        personalAdsDataRepository.postAd(com.itacademy.common.model.AdDTO(
+            price = ad.price,
+            title = ad.title,
+            description = ad.description,
+            type = TypeAd.valueOf(ad.type.toString()),
+            state = ad.state?.let { StateAd.valueOf(it.name) } ?: null
+        ))
     }
 
 }

@@ -3,4 +3,7 @@
     <string name="next">Продолжить</string>
     <string name="specify_name">Укажите название</string>
     <string name="enter_hint">Введите значение</string>
+    <string name="specify_description">Укажите описание</string>
+    <string name="state">Состояние</string>
+    <string name="type">Выберете тип объявления</string>
 </resources>
