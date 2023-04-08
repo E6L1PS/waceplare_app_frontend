@@ -2,7 +2,6 @@ package com.itacademy.data.repository
 
 import android.content.SharedPreferences
 import com.itacademy.common.Resource
-import com.itacademy.common.model.AuthResult
 import com.itacademy.data.AuthDataRepository
 import com.itacademy.data.api.AuthApi
 import com.itacademy.data.util.Constants
@@ -85,5 +84,11 @@ class AuthDataDataRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             Resource.error(e.toString(), null)
         }
+    }
+
+    override suspend fun logOut() {
+        sharedPreferences.edit()
+            .putString(Constants.JWT_KEY, null)
+            .apply()
     }
 }
