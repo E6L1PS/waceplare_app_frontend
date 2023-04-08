@@ -8,7 +8,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.common.Resource
-import com.itacademy.common.model.AuthResult
 import com.itacademy.navigation.NavCommand
 import com.itacademy.navigation.NavCommands
 import com.itacademy.navigation.navigate
@@ -16,6 +15,7 @@ import com.itacademy.sign_in.R
 import com.itacademy.sign_in.databinding.FragmentSignInBinding
 import com.itacademy.sign_in.domain.model.AuthenticationRequest
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -36,32 +36,33 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                     )
                 )
             }
+        }
 
-            lifecycleScope.launchWhenStarted {
-                viewModel.isAuthenticated.collect { isAuthenticated ->
-                    when (isAuthenticated) {
-                        is Resource.Success -> {
-                            navigate(
-                                NavCommand(
-                                    NavCommands.DeepLink(
-                                        url = Uri.parse("waceplare://main"),
-                                        isSingleTop = true
-                                    )
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isAuthenticated.collect { isAuthenticated ->
+                when (isAuthenticated) {
+                    is Resource.Success -> {
+                        navigate(
+                            NavCommand(
+                                NavCommands.DeepLink(
+                                    url = Uri.parse("waceplare://main"),
+                                    isSingleTop = true
                                 )
                             )
-                        }
-                        is Resource.Error -> {
+                        )
+                    }
 
-                        }
-                        is Resource.Loading -> {
+                    is Resource.Error -> {
 
-                        }
+                    }
+
+                    is Resource.Loading -> {
 
                     }
                 }
             }
         }
+
+
     }
-
-
 }

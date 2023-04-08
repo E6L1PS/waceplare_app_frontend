@@ -1,18 +1,15 @@
 package com.itacademy.waceplare.ui.fragment
 
-import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.common.Resource
-import com.itacademy.common.model.AuthResult
 import com.itacademy.navigation.NavCommand
 import com.itacademy.navigation.NavCommands
 import com.itacademy.navigation.navigate
@@ -20,6 +17,7 @@ import com.itacademy.sign_in.presentation.AuthViewModel
 import com.itacademy.waceplare.R
 import com.itacademy.waceplare.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SplashFragment : Fragment(R.layout.fragment_splash) {
@@ -30,7 +28,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isAuthenticated.collect { isAuthenticated ->
                 when (isAuthenticated) {
                     is Resource.Success -> {

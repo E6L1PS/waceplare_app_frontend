@@ -21,6 +21,7 @@ import com.itacademy.personal_ads.databinding.FragmentAdsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AdsFragment : Fragment(R.layout.fragment_ads) {
@@ -33,23 +34,20 @@ class AdsFragment : Fragment(R.layout.fragment_ads) {
         super.onViewCreated(view, savedInstanceState)
         setupRV()
 
-        lifecycleScope.launchWhenStarted {
-            with(binding) {
-                btnEnter.setOnClickListener {
-                    // TODO create a new fragment for post ad
-
-                    navigate(
-                        NavCommand(
-                            NavCommands.DeepLink(
-                                url = Uri.parse("waceplare://new")
-                            )
+        with(binding) {
+            btnEnter.setOnClickListener {
+                navigate(
+                    NavCommand(
+                        NavCommands.DeepLink(
+                            url = Uri.parse("waceplare://new")
                         )
                     )
-                }
+                )
             }
         }
 
-        lifecycleScope.launchWhenStarted {
+
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.ads
                 .onEach { resource ->
                     when (resource) {
@@ -65,9 +63,11 @@ class AdsFragment : Fragment(R.layout.fragment_ads) {
                             adsAdapter.differ.submitList(data)
                             binding.progressBar2.visibility = View.GONE
                         }
+
                         is Resource.Loading -> {
                             binding.progressBar2.visibility = View.VISIBLE
                         }
+
                         is Resource.Error -> {
                             binding.progressBar2.visibility = View.GONE
                             Toast.makeText(context, resource.message, Toast.LENGTH_SHORT).show()

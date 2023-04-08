@@ -24,6 +24,7 @@ import com.itacademy.search.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -42,7 +43,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
         setupRV()
 
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.ads
                 .onEach { resource ->
                     when (resource) {

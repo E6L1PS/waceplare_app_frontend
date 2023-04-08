@@ -15,6 +15,7 @@ import com.itacademy.navigation.navigate
 import com.itacademy.profile.R
 import com.itacademy.profile.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -23,7 +24,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isAuthenticated.collect { isAuthenticated ->
                 when (isAuthenticated) {
                     is Resource.Success -> {
