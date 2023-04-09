@@ -54,4 +54,12 @@
             android:id="@+id/deepLink3"
             app:uri="waceplare://naming_ad/{type}" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.itacademy.search.presentation.AboutFragment"
+        android:label="AboutFragment">
+        <deepLink
+            android:id="@+id/deepLink6"
+            app:uri="waceplare://about/{id}" />
+    </fragment>
 </navigation>

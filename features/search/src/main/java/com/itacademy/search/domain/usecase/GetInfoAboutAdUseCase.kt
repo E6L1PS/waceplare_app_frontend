@@ -3,11 +3,12 @@ package com.itacademy.search.domain.usecase
 import com.itacademy.common.Resource
 import com.itacademy.common.model.Ad
 import com.itacademy.search.domain.repository.AdsRepository
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class SearchAdsByTitleUseCase @Inject constructor(
+class GetInfoAboutAdUseCase @Inject constructor(
     private val adsRepository: AdsRepository
 ) {
-   suspend fun searchByTitle(title: String?): Flow<Resource<List<Ad>?>> = adsRepository.getAds(title)
+    suspend fun getAd(id: Long): Resource<Ad?> {
+        return adsRepository.getAd(id)
+    }
 }

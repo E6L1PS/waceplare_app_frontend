@@ -12,7 +12,7 @@
         android:icon="@drawable/waceplare"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Digitalappmobile"
+        android:theme="@style/Base.V28.Theme.DigitalAppMobile"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
@@ -20,11 +20,13 @@
             android:windowSoftInputMode="adjustPan"
             android:name=".ui.MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
         </activity>
 
     </application>

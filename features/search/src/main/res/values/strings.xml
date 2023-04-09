@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="write">Написать</string>
+    <string name="description">Описание</string>
+    <string name="characteristic">Характеристики</string>
+    <string name="ad_info">Объявление №%1$d\nДата %2$s\n%3$d просмотров</string>
+    <string name="report">Пожаловаться на объявление</string>
+</resources>

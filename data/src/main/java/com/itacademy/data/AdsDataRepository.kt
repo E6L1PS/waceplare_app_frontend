@@ -6,4 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface AdsDataRepository {
     suspend fun getAds(title: String?): Flow<Resource<List<Ad>?>>
+
+    suspend fun getAd(id: Long): Resource<Ad?>
 }

@@ -1,13 +1,15 @@
 package com.itacademy.search.presentation
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -16,9 +18,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.common.Resource
+import com.itacademy.navigation.NavCommand
+import com.itacademy.navigation.NavCommands
+import com.itacademy.navigation.navigate
 import com.itacademy.search.R
 import com.itacademy.search.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -76,17 +80,33 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
 
 
     private fun setupRV() {
-        val divider = DividerItemDecoration(context, RecyclerView.VERTICAL)
-        ResourcesCompat.getDrawable(resources, com.itacademy.theme.R.drawable.divider, null)?.let {
-            divider.setDrawable(it)
-        }
+        val dividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        dividerItemDecoration.setDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                com.itacademy.theme.R.drawable.default_divider
+            )!!
+        )
 
-        adsAdapter = AdsAdapter()
+        adsAdapter = AdsAdapter(object : AdOnClickListener {
+            override fun adSelect(adId: Long) {
+                Log.d("navigateToAboutAd", adId.toString())
+                navigate(
+                    NavCommand(
+                        NavCommands.DeepLink(
+                            url = Uri.parse("waceplare://about/$adId")
+                        )
+                    )
+                )
+            }
+
+        })
         binding.recyclerView.apply {
-            addItemDecoration(divider)
+            addItemDecoration(dividerItemDecoration)
             layoutManager = LinearLayoutManager(activity)
             adapter = adsAdapter
         }
+
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

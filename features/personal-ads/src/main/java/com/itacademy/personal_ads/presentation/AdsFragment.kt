@@ -4,13 +4,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.common.Resource
 import com.itacademy.navigation.NavCommand
@@ -82,16 +81,22 @@ class AdsFragment : Fragment(R.layout.fragment_ads) {
 
 
     private fun setupRV() {
-        val divider = DividerItemDecoration(context, RecyclerView.VERTICAL)
-        ResourcesCompat.getDrawable(resources, com.itacademy.theme.R.drawable.divider, null)?.let {
-            divider.setDrawable(it)
-        }
+        val dividerItemDecoration =
+            DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        dividerItemDecoration.setDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                com.itacademy.theme.R.drawable.default_divider
+            )!!
+        )
+
         adsAdapter = MyAdsAdapter()
         binding.recyclerView.apply {
-            addItemDecoration(divider)
+            addItemDecoration(dividerItemDecoration)
             layoutManager = LinearLayoutManager(activity)
             adapter = adsAdapter
         }
+
     }
 
     companion object {

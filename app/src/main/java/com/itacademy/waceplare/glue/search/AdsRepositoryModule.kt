@@ -1,6 +1,6 @@
 package com.itacademy.waceplare.glue.search
 
-import com.itacademy.search.AdsRepository
+import com.itacademy.search.domain.repository.AdsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

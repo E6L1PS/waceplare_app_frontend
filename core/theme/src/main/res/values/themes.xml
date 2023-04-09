@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Digitalappmobile" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Base.V28.Theme.DigitalAppMobile" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/gray_low</item>
+        <item name="colorPrimary">@color/orange</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -15,9 +15,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="SplashActivity" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_theme</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
+    <style name="Base.Theme.DigitalAppMobile" parent="Base.V28.Theme.DigitalAppMobile"/>
+
 </resources>

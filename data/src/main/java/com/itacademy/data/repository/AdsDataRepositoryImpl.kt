@@ -33,4 +33,16 @@ class AdsDataRepositoryImpl @Inject constructor(
     }.catch { exception ->
         emit(Resource.error(exception.message ?: "Error occurred", null))
     }.flowOn(Dispatchers.IO)
+
+    override suspend fun getAd(id: Long): Resource<Ad?> {
+        val response = api.getAd(id)
+
+        return if (response.isSuccessful) {
+            Resource.success(response.body())
+        } else {
+            Resource.error(response.message())
+        }
+    }
+
+
 }
