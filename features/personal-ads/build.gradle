@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation Libs.Other.Glide
+
     implementation Libs.Other.ViewBindingDelegate
 
     implementation Libs.Android.NavigationFragments

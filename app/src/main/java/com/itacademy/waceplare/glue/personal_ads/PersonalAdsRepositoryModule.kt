@@ -1,6 +1,6 @@
 package com.itacademy.waceplare.glue.personal_ads
 
-import com.itacademy.personal_ads.PersonalAdsRepository
+import com.itacademy.personal_ads.domain.repository.PersonalAdsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

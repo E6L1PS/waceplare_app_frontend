@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.itacademy.data.api.AdsApi
 import com.itacademy.data.api.AuthApi
+import com.itacademy.data.api.FavoritesApi
 import com.itacademy.data.api.SearchApi
 import com.itacademy.data.util.AuthTokenInterceptor
 import com.itacademy.data.util.Constants
@@ -71,5 +72,9 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideAdsApi(retrofit: Retrofit): AdsApi = retrofit.create(AdsApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideFavoritesApi(retrofit: Retrofit): FavoritesApi = retrofit.create(FavoritesApi::class.java)
 
 }

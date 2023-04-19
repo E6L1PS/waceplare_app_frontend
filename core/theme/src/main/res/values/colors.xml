@@ -16,4 +16,5 @@
     <color name="orange_main">#FF6A16</color>
     <color name="orange_sign_low">#FFD2B8</color>
     <color name="orange_sign">#FFB88F</color>
+    <color name="red">#FF0000</color>
 </resources>

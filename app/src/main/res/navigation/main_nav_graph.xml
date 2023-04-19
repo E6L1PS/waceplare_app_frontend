@@ -62,4 +62,12 @@
             android:id="@+id/deepLink6"
             app:uri="waceplare://about/{id}" />
     </fragment>
+    <fragment
+        android:id="@+id/uploadImagesFragment"
+        android:name="com.itacademy.personal_ads.presentation.create_ad_screens.UploadImagesFragment"
+        android:label="UploadImagesFragment">
+        <deepLink
+            android:id="@+id/deepLink7"
+            app:uri="waceplare://upload_images" />
+    </fragment>
 </navigation>

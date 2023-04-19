@@ -46,9 +46,28 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
         super.onViewCreated(view, savedInstanceState)
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
         setupRV()
+/*
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.favorites
+                .onEach { resource ->
+                    when (resource) {
+                        is Resource.Success -> {
+                            val favoriteItems = resource.data ?: emptyList()
+                            adsAdapter.setFavoriteItems(favoriteItems)
+                        }
+                        is Resource.Loading -> {
+                            adsAdapter.setFavoriteItems(emptyList())
+                        }
+                        is Resource.Error -> {
+                            adsAdapter.setFavoriteItems(emptyList())
+                        }
+                    }
+                }
+                .collect()
+        }*/
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.ads
+            viewModel.adsWithFavorite
                 .onEach { resource ->
                     when (resource) {
                         is Resource.Success -> {
@@ -98,6 +117,14 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
                         )
                     )
                 )
+            }
+
+            override fun addFavorite(adId: Long) {
+                viewModel.addFavorite(adId)
+            }
+
+            override fun deleteFavorite(adId: Long) {
+                viewModel.deleteFavorite(adId)
             }
 
         })

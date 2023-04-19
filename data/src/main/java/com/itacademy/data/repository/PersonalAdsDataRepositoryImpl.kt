@@ -10,9 +10,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import javax.inject.Inject
 
-class PersonalAdsDataDataRepositoryImpl @Inject constructor(
+class PersonalAdsDataRepositoryImpl @Inject constructor(
     private val api: AdsApi
 ) : PersonalAdsDataRepository {
 
@@ -68,6 +72,18 @@ class PersonalAdsDataDataRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun uploadImages(adId: Long, images: List<File>) {
+        val imageParts = images.map { file ->
+            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+            MultipartBody.Part.createFormData("images", file.name, requestBody)
+        }
+        val response = api.uploadImages(adId, images = imageParts)
+        if (response.isSuccessful) {
+            Resource.success(response.body())
+        } else {
+            Resource.error(response.message(), null)
+        }
+    }
 
 
 }

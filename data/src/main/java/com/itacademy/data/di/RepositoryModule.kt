@@ -2,10 +2,12 @@ package com.itacademy.data.di
 
 import com.itacademy.data.AdsDataRepository
 import com.itacademy.data.AuthDataRepository
+import com.itacademy.data.FavoritesDataRepository
 import com.itacademy.data.PersonalAdsDataRepository
 import com.itacademy.data.repository.AdsDataRepositoryImpl
 import com.itacademy.data.repository.AuthDataDataRepositoryImpl
-import com.itacademy.data.repository.PersonalAdsDataDataRepositoryImpl
+import com.itacademy.data.repository.FavoritesDataRepositoryImpl
+import com.itacademy.data.repository.PersonalAdsDataRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -29,10 +31,15 @@ interface RepositoryModule {
         adsDataRepositoryImpl: AdsDataRepositoryImpl
     ): AdsDataRepository
 
+    @Binds
+    @Singleton
+    fun bindFavoritesRepository(
+        favoritesDataRepositoryImpl: FavoritesDataRepositoryImpl
+    ): FavoritesDataRepository
 
     @Binds
     @Singleton
     fun bindPersonalAdsRepository(
-        adsDataDataRepositoryImpl: PersonalAdsDataDataRepositoryImpl
+        adsDataDataRepositoryImpl: PersonalAdsDataRepositoryImpl
     ): PersonalAdsDataRepository
 }

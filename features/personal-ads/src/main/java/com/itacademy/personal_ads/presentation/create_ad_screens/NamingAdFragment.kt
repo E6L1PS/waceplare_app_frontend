@@ -1,5 +1,6 @@
 package com.itacademy.personal_ads.presentation.create_ad_screens
 
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.itacademy.navigation.NavCommand
+import com.itacademy.navigation.NavCommands
+import com.itacademy.navigation.navigate
 import com.itacademy.personal_ads.R
 import com.itacademy.personal_ads.databinding.FragmentNamingAdBinding
 import com.itacademy.personal_ads.domain.model.AdDTO
@@ -87,6 +91,14 @@ class NamingAdFragment : Fragment(R.layout.fragment_naming_ad) {
                         )
                     )
 
+                    navigate(
+                        NavCommand(
+                            NavCommands.DeepLink(
+                                url = Uri.parse("waceplare://upload_images")
+                            )
+                        )
+                    )
+
                 } else {
                     Log.d("dadadAda", type)
                     viewModel.postAd(AdDTO(
@@ -96,6 +108,14 @@ class NamingAdFragment : Fragment(R.layout.fragment_naming_ad) {
                         TypeAd.valueOf(type),
                         null
                     ))
+
+                    navigate(
+                        NavCommand(
+                            NavCommands.DeepLink(
+                                url = Uri.parse("waceplare://upload_images")
+                            )
+                        )
+                    )
                 }
 
             } else {

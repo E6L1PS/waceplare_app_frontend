@@ -5,9 +5,10 @@ import com.itacademy.common.model.Ad
 import com.itacademy.common.model.StateAd
 import com.itacademy.common.model.TypeAd
 import com.itacademy.data.PersonalAdsDataRepository
-import com.itacademy.personal_ads.PersonalAdsRepository
+import com.itacademy.personal_ads.domain.repository.PersonalAdsRepository
 import com.itacademy.personal_ads.domain.model.AdDTO
 import kotlinx.coroutines.flow.Flow
+import java.io.File
 import javax.inject.Inject
 
 class AdapterPersonalAdsRepository @Inject constructor(
@@ -26,6 +27,10 @@ class AdapterPersonalAdsRepository @Inject constructor(
             type = TypeAd.valueOf(ad.type.toString()),
             state = ad.state?.let { StateAd.valueOf(it.name) } ?: null
         ))
+    }
+
+    override suspend fun uploadImages(adId: Long, images: List<File>) {
+        return personalAdsDataRepository.uploadImages(adId, images)
     }
 
 }

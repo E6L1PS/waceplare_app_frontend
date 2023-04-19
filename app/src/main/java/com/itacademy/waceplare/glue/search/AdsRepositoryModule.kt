@@ -1,6 +1,7 @@
 package com.itacademy.waceplare.glue.search
 
 import com.itacademy.search.domain.repository.AdsRepository
+import com.itacademy.search.domain.repository.FavoritesRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -11,4 +12,7 @@ import dagger.hilt.components.SingletonComponent
 interface AdsRepositoryModule {
     @Binds
     fun bindAdsRepository(adapterAdsRepository: AdapterAdsRepository): AdsRepository
+
+    @Binds
+    fun bindFavoritesRepository(adapterFavoritesRepository: AdapterFavoritesRepository): FavoritesRepository
 }
