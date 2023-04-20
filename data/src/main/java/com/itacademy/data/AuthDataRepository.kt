@@ -1,8 +1,8 @@
 package com.itacademy.data
 
 import com.itacademy.common.Resource
-import com.itacademy.sign_in.domain.model.AuthenticationRequest
-import com.itacademy.sign_in.domain.model.RegisterRequest
+import com.itacademy.common.model.AuthenticationRequest
+import com.itacademy.common.model.RegisterRequest
 
 
 interface AuthDataRepository {

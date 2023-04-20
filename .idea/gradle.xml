@@ -17,13 +17,12 @@
             <option value="$PROJECT_DIR$/core/theme" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/auth" />
             <option value="$PROJECT_DIR$/features/favorites" />
             <option value="$PROJECT_DIR$/features/messages" />
             <option value="$PROJECT_DIR$/features/personal-ads" />
             <option value="$PROJECT_DIR$/features/profile" />
             <option value="$PROJECT_DIR$/features/search" />
-            <option value="$PROJECT_DIR$/features/sign-in" />
-            <option value="$PROJECT_DIR$/features/sign-up" />
           </set>
         </option>
       </GradleProjectSettings>

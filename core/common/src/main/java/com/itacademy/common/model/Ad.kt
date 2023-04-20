@@ -8,7 +8,7 @@ data class Ad(
     val description: String,
     val status: Boolean,
     val dateOfCreated: String,
-    val user: User,
-    val category: Category,
-    val comments: List<Any>
+    val type: TypeAd,
+    val state: StateAd?,
+    val comments: List<Comment>
 )

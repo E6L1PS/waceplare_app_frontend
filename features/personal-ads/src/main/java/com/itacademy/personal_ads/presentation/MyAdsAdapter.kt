@@ -43,8 +43,11 @@ class MyAdsAdapter : RecyclerView.Adapter<MyAdsAdapter.MyAdsVH>() {
         with(holder.binding) {
             tvMyTitle.text = ad.title
             tvMyPrice.text = String.format("%,d", ad.price).replace(",", " ").plus(" Р")
+            //val random = Random.nextInt(500)
+
+            //http://192.168.0.106:8080/api/v1/ads/${ad.id}/image
             Glide.with(holder.itemView.context)
-                .load("http://192.168.0.106:8080/api/v1/ads/${ad.id}/image")
+                .load("https://picsum.photos/id/${ad.id}/500/500")
                 .into(ivMyAd)
             tvViews.text = ad.views.toString()
 

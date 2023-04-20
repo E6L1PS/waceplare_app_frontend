@@ -3,10 +3,8 @@ package com.itacademy.data.di
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.itacademy.data.api.AdsApi
-import com.itacademy.data.api.AuthApi
-import com.itacademy.data.api.FavoritesApi
-import com.itacademy.data.api.SearchApi
+import com.itacademy.data.api.*
+import com.itacademy.data.model.User
 import com.itacademy.data.util.AuthTokenInterceptor
 import com.itacademy.data.util.Constants
 import dagger.Module
@@ -76,5 +74,9 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideFavoritesApi(retrofit: Retrofit): FavoritesApi = retrofit.create(FavoritesApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserApi(retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
 
 }

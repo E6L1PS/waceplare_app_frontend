@@ -1,6 +1,6 @@
 package com.itacademy.common.model
 
-data class AdModel(
+data class AdWithIsFavorite(
     val id: Long,
     val price: Int,
     val views: Int,
@@ -8,6 +8,8 @@ data class AdModel(
     val description: String,
     val status: Boolean,
     val dateOfCreated: String,
-    val comments: List<Any>,
+    val type: TypeAd,
+    val state: StateAd?,
+    val comments: List<Comment>,
     val isFavorite: Boolean
 )

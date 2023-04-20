@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.itacademy.common.Resource
 import com.itacademy.common.model.Ad
-import com.itacademy.common.model.AdModel
+import com.itacademy.common.model.AdWithIsFavorite
 import com.itacademy.search.domain.usecase.FavoritesUseCase
 import com.itacademy.search.domain.usecase.SearchAdsByTitleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,14 +27,14 @@ class SearchViewModel @Inject constructor(
    // val favorites: StateFlow<Resource<List<Long>?>> = _favorites.asStateFlow()
 
    // private val _adsWithFavorite = MutableStateFlow<Resource<List<AdModel>?>>(Resource.loading(null))
-    val adsWithFavorite: StateFlow<Resource<List<AdModel>?>> = combine(_ads, _favorites) { adsResource, favoritesResource ->
+    val adsWithFavorite: StateFlow<Resource<List<AdWithIsFavorite>?>> = combine(_ads, _favorites) { adsResource, favoritesResource ->
         // проверяем, что оба flow имеют статус SUCCESS
        Log.d("Resource.Successa","${adsResource is Resource.Success && favoritesResource is Resource.Success}" )
         if (adsResource is Resource.Success && favoritesResource is Resource.Success) {
             val favRes = favoritesResource.data.orEmpty()
             // преобразовываем List<Ad> в List<AdModel>
             val ads = adsResource.data.orEmpty().map { ad ->
-                AdModel(
+                AdWithIsFavorite(
                     id = ad.id,
                     title = ad.title,
                     description = ad.description,
@@ -43,6 +43,8 @@ class SearchViewModel @Inject constructor(
                     status = ad.status,
                     dateOfCreated = ad.dateOfCreated,
                     comments = ad.comments,
+                    type = ad.type,
+                    state = ad.state,
                     isFavorite = favoritesResource.data.orEmpty().contains(ad.id)
                 )
             }

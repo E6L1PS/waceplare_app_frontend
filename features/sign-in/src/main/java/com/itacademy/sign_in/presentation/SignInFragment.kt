@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.common.Resource
 import com.itacademy.navigation.NavCommand
@@ -33,6 +34,20 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                     AuthenticationRequest(
                         tiEtEmail.text.toString(),
                         tiEtPassword.text.toString()
+                    )
+                )
+            }
+
+            btnSignUp.setOnClickListener {
+                findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+            }
+
+            btnSkip.setOnClickListener {
+                navigate(
+                    NavCommand(
+                        NavCommands.DeepLink(
+                            url = Uri.parse("waceplare://main")
+                        )
                     )
                 )
             }

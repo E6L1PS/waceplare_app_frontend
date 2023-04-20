@@ -13,7 +13,7 @@ import com.itacademy.common.Resource
 import com.itacademy.navigation.NavCommand
 import com.itacademy.navigation.NavCommands
 import com.itacademy.navigation.navigate
-import com.itacademy.sign_in.presentation.AuthViewModel
+import com.itacademy.auth.presentation.AuthViewModel
 import com.itacademy.waceplare.R
 import com.itacademy.waceplare.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint

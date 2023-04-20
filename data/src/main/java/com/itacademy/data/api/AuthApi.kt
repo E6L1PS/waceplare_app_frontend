@@ -1,8 +1,8 @@
 package com.itacademy.data.api
 
-import com.itacademy.sign_in.domain.model.AuthenticationRequest
-import com.itacademy.sign_in.domain.model.RegisterRequest
-import com.itacademy.sign_in.domain.model.TokenResponse
+import com.itacademy.common.model.AuthenticationRequest
+import com.itacademy.common.model.RegisterRequest
+import com.itacademy.common.model.TokenResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

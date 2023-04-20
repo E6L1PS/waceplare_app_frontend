@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enter">Вход</string>
+    <string name="email">Email</string>
+    <string name="password">Пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="skip">Пропустить</string>
+    <string name="registration">Регистрация</string>
+    <string name="name">Имя</string>
+    <string name="lastname">Фамилия</string>
+</resources>

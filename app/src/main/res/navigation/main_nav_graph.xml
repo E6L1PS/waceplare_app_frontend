@@ -16,8 +16,6 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-    <include app:graph="@navigation/sign_in_nav_graph" />
-
     <fragment
         android:id="@+id/tabsFragment"
         android:name="com.itacademy.waceplare.ui.fragment.TabsFragment"
@@ -70,4 +68,5 @@
             android:id="@+id/deepLink7"
             app:uri="waceplare://upload_images" />
     </fragment>
+    <include app:graph="@navigation/auth_nav_graph" />
 </navigation>

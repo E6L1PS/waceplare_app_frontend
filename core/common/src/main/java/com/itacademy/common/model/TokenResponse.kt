@@ -1,4 +1,4 @@
-package com.itacademy.sign_in.domain.model
+package com.itacademy.common.model
 
 data class TokenResponse(
     val token: String

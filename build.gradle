@@ -64,8 +64,7 @@ buildscript {
                         Theme: ":core:theme",
                 ],
                 Features: [
-                        SignIn: ":features:sign-in",
-                        SignUp: ":features:sign-up",
+                        Auth: ":features:auth",
                         Search: ":features:search",
                         Favorites: ":features:favorites",
                         PersonalAds: ":features:personal-ads",

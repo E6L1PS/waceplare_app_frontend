@@ -5,8 +5,8 @@ import com.itacademy.common.Resource
 import com.itacademy.data.AuthDataRepository
 import com.itacademy.data.api.AuthApi
 import com.itacademy.data.util.Constants
-import com.itacademy.sign_in.domain.model.AuthenticationRequest
-import com.itacademy.sign_in.domain.model.RegisterRequest
+import com.itacademy.common.model.AuthenticationRequest
+import com.itacademy.common.model.RegisterRequest
 import retrofit2.HttpException
 import javax.inject.Inject
 

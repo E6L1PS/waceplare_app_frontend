@@ -1,4 +1,4 @@
-package com.itacademy.sign_in.domain.model
+package com.itacademy.common.model
 
 data class AuthenticationRequest(
     val email: String,

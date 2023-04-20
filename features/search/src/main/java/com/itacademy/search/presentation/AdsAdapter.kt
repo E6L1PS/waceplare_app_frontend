@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.itacademy.common.model.AdModel
-import com.itacademy.search.R
+import com.itacademy.common.model.AdWithIsFavorite
 import com.itacademy.search.databinding.ItemAdBinding
-import kotlin.random.Random
 
 interface AdOnClickListener {
     fun adSelect(adId: Long)
@@ -24,12 +22,12 @@ class AdsAdapter(private val adOnClickListener: AdOnClickListener) :
 
     inner class AdsVH(val binding: ItemAdBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<AdModel>() {
-        override fun areItemsTheSame(oldItem: AdModel, newItem: AdModel): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<AdWithIsFavorite>() {
+        override fun areItemsTheSame(oldItem: AdWithIsFavorite, newItem: AdWithIsFavorite): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: AdModel, newItem: AdModel): Boolean {
+        override fun areContentsTheSame(oldItem: AdWithIsFavorite, newItem: AdWithIsFavorite): Boolean {
             return oldItem == newItem
         }
 
@@ -63,7 +61,7 @@ class AdsAdapter(private val adOnClickListener: AdOnClickListener) :
             tvDateOfCreation.text = ad.dateOfCreated
 
 
-            cbFavorite.isChecked = ad.isFavorite
+            //cbFavorite.isChecked = ad.isFavorite
 
             if (ad.isFavorite) {
                 ivFavorite.setImageResource(com.itacademy.theme.R.drawable.favorite_true_ic)
@@ -95,12 +93,13 @@ class AdsAdapter(private val adOnClickListener: AdOnClickListener) :
 
             }*/
 
-            cbFavorite.isChecked = ad.isFavorite
+            //cbFavorite.isChecked = ad.isFavorite
             Log.d("CHECKED_ADD",  ad.isFavorite.toString())
-          /*  val random = Random.nextInt(500)
-                .load("https://picsum.photos/id/$random/500/500")*/
+            //val random = Random.nextInt(500)
+
+            //http://192.168.0.106:8080/api/v1/ads/${ad.id}/image
             Glide.with(holder.itemView.context)
-                .load("http://192.168.0.106:8080/api/v1/ads/${ad.id}/image")
+                .load("https://picsum.photos/id/${ad.id}/500/500")
                 .into(ivAd)
         }
     }

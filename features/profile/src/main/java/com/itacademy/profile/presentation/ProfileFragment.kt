@@ -15,6 +15,8 @@ import com.itacademy.navigation.navigate
 import com.itacademy.profile.R
 import com.itacademy.profile.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -25,12 +27,45 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.userInfo.onEach {
+                when (it) {
+                    is Resource.Error -> {
+                        binding.infoPerson.clInfo.visibility = View.GONE
+                    }
+                    is Resource.Loading -> {
+                        binding.infoPerson.clInfo.visibility = View.GONE
+                    }
+                    is Resource.Success -> {
+                        val userInfo = it.data
+                        if (userInfo != null) {
+                            with(binding.infoPerson) {
+                                clInfo.visibility = View.VISIBLE
+
+                                tvFullName.text = userInfo.firstname + " " + userInfo.lastname
+                                tvId.text = "Номер профиля " + userInfo.id.toString()
+                                tvEmail.text = userInfo.email
+                                tvRating.text = userInfo.rating.toString()
+                                tvCalendar.text = userInfo.dateOfCreated
+                                tvLocation.text = "Moscow"
+                            }
+
+                        }
+                    }
+                }
+            }.collect()
+        }
+
+
+
+
+
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isAuthenticated.collect { isAuthenticated ->
                 when (isAuthenticated) {
                     is Resource.Success -> {
                         with(binding) {
                             btnSignIn.visibility = View.GONE
-                            btnLogout.visibility = View.VISIBLE
+                            infoPerson.clInfo.visibility = View.VISIBLE
                             Log.d("navigate to sign fragment", "logout")
                             btnLogout.setOnClickListener {
                                 Log.d("navigate to sign fragment", "btn")
@@ -42,7 +77,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     is Resource.Loading -> {
                         with(binding) {
                             btnSignIn.visibility = View.GONE
-                            btnLogout.visibility = View.GONE
+                            infoPerson.clInfo.visibility = View.GONE
                         }
                         Log.d("navigate to sign fragment", "load")
                     }
@@ -50,7 +85,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     is Resource.Error -> {
                         with(binding) {
                             btnSignIn.visibility = View.VISIBLE
-                            btnLogout.visibility = View.GONE
+                            infoPerson.clInfo.visibility = View.GONE
                             btnSignIn.setOnClickListener {
                                 Log.d("navigate to sign fragment", "nav")
                                 navigate(
@@ -70,6 +105,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
 
         }
+
 
     }
 }
