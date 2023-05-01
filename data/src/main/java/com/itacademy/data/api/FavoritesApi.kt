@@ -21,4 +21,9 @@ interface FavoritesApi {
     @DELETE("favorites/{adId}")
     suspend fun deleteFavoriteAd(@Path(value = "adId") adId: Long)
 
+    @DELETE("favorites")
+    suspend fun deleteFavorites()
+
+    @DELETE("favorites/inactive")
+    suspend fun deleteInactiveFavorites()
 }

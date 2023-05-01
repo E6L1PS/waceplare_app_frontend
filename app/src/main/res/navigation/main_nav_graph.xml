@@ -52,6 +52,7 @@
             android:id="@+id/deepLink3"
             app:uri="waceplare://naming_ad/{type}" />
     </fragment>
+
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.itacademy.search.presentation.AboutFragment"
@@ -60,6 +61,7 @@
             android:id="@+id/deepLink6"
             app:uri="waceplare://about/{id}" />
     </fragment>
+
     <fragment
         android:id="@+id/uploadImagesFragment"
         android:name="com.itacademy.personal_ads.presentation.create_ad_screens.UploadImagesFragment"

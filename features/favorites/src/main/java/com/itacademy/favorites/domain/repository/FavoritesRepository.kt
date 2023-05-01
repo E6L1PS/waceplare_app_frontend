@@ -1,14 +1,12 @@
-package com.itacademy.data
+package com.itacademy.favorites.domain.repository
 
 import com.itacademy.common.Resource
 import com.itacademy.common.model.Ad
 import kotlinx.coroutines.flow.Flow
 
-interface FavoritesDataRepository {
+interface FavoritesRepository {
 
     suspend fun getFavorites(): Flow<Resource<List<Ad>?>>
-
-    suspend fun getFavoritesId(): Flow<Resource<List<Long>?>>
 
     suspend fun addFavorite(adId: Long)
 

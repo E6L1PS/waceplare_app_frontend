@@ -56,9 +56,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
 
 
-
-
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isAuthenticated.collect { isAuthenticated ->
                 when (isAuthenticated) {
@@ -66,9 +63,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         with(binding) {
                             btnSignIn.visibility = View.GONE
                             infoPerson.clInfo.visibility = View.VISIBLE
-                            Log.d("navigate to sign fragment", "logout")
                             btnLogout.setOnClickListener {
-                                Log.d("navigate to sign fragment", "btn")
                                 viewModel.logOut()
                             }
                         }
@@ -79,15 +74,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                             btnSignIn.visibility = View.GONE
                             infoPerson.clInfo.visibility = View.GONE
                         }
-                        Log.d("navigate to sign fragment", "load")
                     }
 
                     is Resource.Error -> {
                         with(binding) {
                             btnSignIn.visibility = View.VISIBLE
                             infoPerson.clInfo.visibility = View.GONE
+                            btnLogout.visibility = View.GONE
                             btnSignIn.setOnClickListener {
-                                Log.d("navigate to sign fragment", "nav")
                                 navigate(
                                     NavCommand(
                                         NavCommands.DeepLink(

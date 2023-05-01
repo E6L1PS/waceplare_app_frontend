@@ -1,16 +1,17 @@
-package com.itacademy.waceplare.glue.search
+package com.itacademy.waceplare.glue.favorites
 
 import com.itacademy.common.Resource
+import com.itacademy.common.model.Ad
 import com.itacademy.data.FavoritesDataRepository
-import com.itacademy.search.domain.repository.FavoritesRepository
+import com.itacademy.favorites.domain.repository.FavoritesRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class AdapterFavoritesRepository @Inject constructor(
     private val favoritesDataRepository: FavoritesDataRepository
 ): FavoritesRepository {
-    override suspend fun getFavoritesId(): Flow<Resource<List<Long>?>> {
-        return favoritesDataRepository.getFavoritesId()
+    override suspend fun getFavorites(): Flow<Resource<List<Ad>?>> {
+        return favoritesDataRepository.getFavorites()
     }
 
     override suspend fun addFavorite(adId: Long) {
@@ -19,6 +20,14 @@ class AdapterFavoritesRepository @Inject constructor(
 
     override suspend fun deleteFavorite(adId: Long) {
         favoritesDataRepository.deleteFavorite(adId)
+    }
+
+    override suspend fun deleteFavorites() {
+        favoritesDataRepository.deleteFavorites()
+    }
+
+    override suspend fun deleteInactiveFavorites() {
+        favoritesDataRepository.deleteInactiveFavorites()
     }
 
 

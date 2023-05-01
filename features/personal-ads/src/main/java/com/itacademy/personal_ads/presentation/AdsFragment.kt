@@ -2,6 +2,7 @@ package com.itacademy.personal_ads.presentation
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -52,7 +53,7 @@ class AdsFragment : Fragment(R.layout.fragment_ads) {
                     when (resource) {
                         is Resource.Success -> {
                             val data = resource.data
-
+                            binding.btnSignIn.visibility = View.GONE
                             if (data.isNullOrEmpty()) {
                                 binding.tvEmptyList2.visibility = View.VISIBLE
                             } else {
@@ -65,11 +66,27 @@ class AdsFragment : Fragment(R.layout.fragment_ads) {
 
                         is Resource.Loading -> {
                             binding.progressBar2.visibility = View.VISIBLE
+                            binding.btnSignIn.visibility = View.GONE
                         }
 
                         is Resource.Error -> {
-                            binding.progressBar2.visibility = View.GONE
-                            Toast.makeText(context, resource.message, Toast.LENGTH_SHORT).show()
+                            with(binding) {
+                                clMain.visibility = View.GONE
+                                btnSignIn.visibility = View.VISIBLE
+
+                                btnSignIn.setOnClickListener {
+                                    navigate(
+                                        NavCommand(
+                                            NavCommands.DeepLink(
+                                                url = Uri.parse("waceplare://login"),
+                                                isSingleTop = true
+                                            )
+                                        )
+                                    )
+                                }
+                            }
+
+
                         }
                     }
                 }

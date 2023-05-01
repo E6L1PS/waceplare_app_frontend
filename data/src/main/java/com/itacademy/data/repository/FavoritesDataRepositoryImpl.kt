@@ -49,7 +49,16 @@ class FavoritesDataRepositoryImpl @Inject constructor(
         api.addFavoriteAd(adId)
     }
 
-    override suspend fun deleteFavorites(adId: Long) {
+    override suspend fun deleteFavorite(adId: Long) {
         api.deleteFavoriteAd(adId)
     }
+
+    override suspend fun deleteFavorites() {
+        api.deleteFavorites()
+    }
+
+    override suspend fun deleteInactiveFavorites() {
+        api.deleteInactiveFavorites()
+    }
+
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="delete_all">Удалить все</string>
+    <string name="delete_inactive">Удалить неактивные</string>
+    <string name="more">Подробнее</string>
+</resources>

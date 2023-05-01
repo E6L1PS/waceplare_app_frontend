@@ -21,40 +21,59 @@ class SearchViewModel @Inject constructor(
     ) : ViewModel() {
 
     private val _ads = MutableStateFlow<Resource<List<Ad>?>>(Resource.loading(null))
-   // val ads: StateFlow<Resource<List<Ad>?>> = _ads.asStateFlow()
+    // val ads: StateFlow<Resource<List<Ad>?>> = _ads.asStateFlow()
 
     private val _favorites = MutableStateFlow<Resource<List<Long>?>>(Resource.loading(null))
-   // val favorites: StateFlow<Resource<List<Long>?>> = _favorites.asStateFlow()
+    // val favorites: StateFlow<Resource<List<Long>?>> = _favorites.asStateFlow()
 
-   // private val _adsWithFavorite = MutableStateFlow<Resource<List<AdModel>?>>(Resource.loading(null))
-    val adsWithFavorite: StateFlow<Resource<List<AdWithIsFavorite>?>> = combine(_ads, _favorites) { adsResource, favoritesResource ->
-        // проверяем, что оба flow имеют статус SUCCESS
-       Log.d("Resource.Successa","${adsResource is Resource.Success && favoritesResource is Resource.Success}" )
-        if (adsResource is Resource.Success && favoritesResource is Resource.Success) {
-            val favRes = favoritesResource.data.orEmpty()
-            // преобразовываем List<Ad> в List<AdModel>
-            val ads = adsResource.data.orEmpty().map { ad ->
-                AdWithIsFavorite(
-                    id = ad.id,
-                    title = ad.title,
-                    description = ad.description,
-                    price = ad.price,
-                    views = ad.views,
-                    status = ad.status,
-                    dateOfCreated = ad.dateOfCreated,
-                    comments = ad.comments,
-                    type = ad.type,
-                    state = ad.state,
-                    isFavorite = favoritesResource.data.orEmpty().contains(ad.id)
-                )
+    // private val _adsWithFavorite = MutableStateFlow<Resource<List<AdModel>?>>(Resource.loading(null))
+    val adsWithFavorite: StateFlow<Resource<List<AdWithIsFavorite>?>> =
+        combine(_ads, _favorites) { adsResource, favoritesResource ->
+
+            if (adsResource is Resource.Success) {
+
+                val ads = if (favoritesResource is Resource.Success) {
+                    val favRes = favoritesResource.data.orEmpty()
+                    // преобразовываем List<Ad> в List<AdModel>
+                    adsResource.data.orEmpty().map { ad ->
+                        AdWithIsFavorite(
+                            id = ad.id,
+                            title = ad.title,
+                            description = ad.description,
+                            price = ad.price,
+                            views = ad.views,
+                            status = ad.status,
+                            dateOfCreated = ad.dateOfCreated,
+                            comments = ad.comments,
+                            type = ad.type,
+                            state = ad.state,
+                            isFavorite = favoritesResource.data.orEmpty().contains(ad.id)
+                        )
+                    }
+
+                } else {
+                    adsResource.data.orEmpty().map { ad ->
+                        AdWithIsFavorite(
+                            id = ad.id,
+                            title = ad.title,
+                            description = ad.description,
+                            price = ad.price,
+                            views = ad.views,
+                            status = ad.status,
+                            dateOfCreated = ad.dateOfCreated,
+                            comments = ad.comments,
+                            type = ad.type,
+                            state = ad.state,
+                            isFavorite = false
+                        )
+                    }
+
+                }
+                Resource.success(ads)
+            } else {
+                Resource.error("Error fetching data", null)
             }
-            Log.d("CHECKED_ADD", "$favRes")
-
-            Resource.success(ads)
-        } else {
-            Resource.error("Error fetching data", null)
-        }
-    }.stateIn(viewModelScope, SharingStarted.Lazily, Resource.loading(null))
+        }.stateIn(viewModelScope, SharingStarted.Lazily, Resource.loading(null))
 
     init {
         getAds(null)
@@ -66,7 +85,6 @@ class SearchViewModel @Inject constructor(
             _ads.emitAll(searchAdsByTitleUseCase.searchByTitle(title))
         }
     }
-
 
 
     fun getFavorites() {

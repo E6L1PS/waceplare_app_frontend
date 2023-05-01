@@ -6,9 +6,18 @@
 
     <item
         android:id="@+id/action_more"
-        android:title="@string/Search"
+        android:title="@string/more"
         android:icon="@drawable/more_ic"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="always|collapseActionView" />
+        app:showAsAction="always|collapseActionView">
+
+        <menu>
+            <item
+                android:id="@+id/action_delete_all"
+                android:title="@string/delete_all"/>
+            <item
+                android:id="@+id/action_delete_inactive"
+                android:title="@string/delete_inactive" />
+        </menu>
+    </item>
 
 </menu>
