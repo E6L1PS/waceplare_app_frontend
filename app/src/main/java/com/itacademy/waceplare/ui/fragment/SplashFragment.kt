@@ -36,8 +36,8 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
                             Log.d("AuthTEST", isAuthenticated.toString())
                             findNavController().navigate(R.id.action_splashFragment_to_tabsFragment)
                         }, 1000)
-
                     }
+
                     is Resource.Error -> {
                         Log.d("AuthTEST", isAuthenticated.toString())
                         view.postDelayed({

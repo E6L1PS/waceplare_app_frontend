@@ -6,4 +6,6 @@
     <string name="specify_description">Укажите описание</string>
     <string name="state">Состояние</string>
     <string name="type">Выберете тип объявления</string>
+    <string name="upload_title">Внешний вид</string>
+    <string name="photos">Фотографии</string>
 </resources>

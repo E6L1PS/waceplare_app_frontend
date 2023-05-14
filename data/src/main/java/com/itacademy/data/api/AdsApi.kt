@@ -24,12 +24,11 @@ interface AdsApi {
     @PUT("ads/my/{adId}/show")
     suspend fun showAd(@Path("adId") adId: Long): Response<Unit>
 
-
     @Multipart
     @POST("{adId}/images")
     suspend fun uploadImages(
         @Path("adId") adId: Long,
-        @Part images: List<MultipartBody.Part>
+        @Part files: List<MultipartBody.Part>
     ): Response<Unit>
 
 }

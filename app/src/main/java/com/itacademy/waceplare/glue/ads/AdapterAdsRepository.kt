@@ -1,9 +1,9 @@
-package com.itacademy.waceplare.glue.search
+package com.itacademy.waceplare.glue.ads
 
 import com.itacademy.common.Resource
 import com.itacademy.common.model.Ad
 import com.itacademy.data.AdsDataRepository
-import com.itacademy.search.domain.repository.AdsRepository
+import com.itacademy.ads.domain.repository.AdsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

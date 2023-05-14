@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import java.io.File
 import javax.inject.Inject
 
@@ -43,7 +44,7 @@ class PersonalAdsViewModel @Inject constructor(
         }
     }
 
-    fun uploadImages(adId: Long, images: List<File>) {
+    fun uploadImages(adId: Long, images: List<ByteArray?>) {
         viewModelScope.launch {
             uploadImagesUseCase.uploadImages(adId, images)
         }

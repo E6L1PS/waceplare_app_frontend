@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+
+    implementation Libs.Squareup.Retrofit
     implementation Libs.Other.Glide
 
     implementation Libs.Other.ViewBindingDelegate

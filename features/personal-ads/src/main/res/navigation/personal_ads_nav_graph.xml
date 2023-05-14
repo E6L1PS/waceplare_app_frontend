@@ -13,4 +13,7 @@
         android:id="@+id/hideAdsFragment"
         android:name="com.itacademy.personal_ads.presentation.HideAdsFragment"
         android:label="HideAdsFragment" />
+    <deepLink
+        android:id="@+id/deepLink"
+        app:uri="waceplare://ads_fragment" />
 </navigation>

@@ -4,6 +4,7 @@ import com.itacademy.common.Resource
 import com.itacademy.common.model.Ad
 import com.itacademy.personal_ads.domain.model.AdDTO
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
 import java.io.File
 
 interface PersonalAdsRepository {
@@ -11,6 +12,6 @@ interface PersonalAdsRepository {
 
     suspend fun postAd(ad: AdDTO)
 
-    suspend fun uploadImages(adId: Long, images: List<File>)
+    suspend fun uploadImages(adId: Long, images: List<ByteArray?>)
     
 }

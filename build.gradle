@@ -65,6 +65,7 @@ buildscript {
                 ],
                 Features: [
                         Auth: ":features:auth",
+                        Ads: ":features:ads",
                         Search: ":features:search",
                         Favorites: ":features:favorites",
                         PersonalAds: ":features:personal-ads",

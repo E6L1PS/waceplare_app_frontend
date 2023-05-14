@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingDefaultResource">
+
+    <item
+        android:id="@+id/action_more"
+        android:title="@string/more"
+        android:icon="@drawable/more_ic"
+        app:showAsAction="always|collapseActionView">
+
+        <menu>
+            <item
+                android:id="@+id/action_delete_all"
+                android:title="@string/delete_all"/>
+            <item
+                android:id="@+id/action_delete_inactive"
+                android:title="@string/delete_inactive" />
+        </menu>
+    </item>
+
+</menu>

@@ -10,5 +10,6 @@ data class Ad(
     val dateOfCreated: String,
     val type: TypeAd,
     val state: StateAd?,
-    val comments: List<Comment>
+    val comments: List<Comment>,
+    val images: List<AdImage>
 )

@@ -13,6 +13,5 @@ interface PersonalAdsDataRepository {
     suspend fun deleteAd(adId: Long)
     suspend fun hideAd(adId: Long)
     suspend fun showAd(adId: Long)
-
-    suspend fun uploadImages(adId: Long, images: List<File>)
+    suspend fun uploadImages(adId: Long, images: List<ByteArray?>)
 }

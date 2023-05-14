@@ -1,5 +1,6 @@
 package com.itacademy.waceplare.glue.personal_ads
 
+import android.util.Log
 import com.itacademy.common.Resource
 import com.itacademy.common.model.Ad
 import com.itacademy.common.model.StateAd
@@ -8,6 +9,7 @@ import com.itacademy.data.PersonalAdsDataRepository
 import com.itacademy.personal_ads.domain.repository.PersonalAdsRepository
 import com.itacademy.personal_ads.domain.model.AdDTO
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
 import java.io.File
 import javax.inject.Inject
 
@@ -29,7 +31,9 @@ class AdapterPersonalAdsRepository @Inject constructor(
         ))
     }
 
-    override suspend fun uploadImages(adId: Long, images: List<File>) {
+    override suspend fun uploadImages(adId: Long, images: List<ByteArray?>) {
+
+        Log.d("bytes___", images.toString())
         return personalAdsDataRepository.uploadImages(adId, images)
     }
 

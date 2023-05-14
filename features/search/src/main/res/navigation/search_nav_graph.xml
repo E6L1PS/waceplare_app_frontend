@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.itacademy.search.presentation.SearchFragment"
+        android:name="com.itacademy.ads.presentation.SearchFragment"
         android:label="SearchFragment"
         app:popUpTo="@+id/search_nav_graph"
         app:popUpToInclusive="true"

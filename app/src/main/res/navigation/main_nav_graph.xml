@@ -55,7 +55,7 @@
 
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.itacademy.search.presentation.AboutFragment"
+        android:name="com.itacademy.ads.presentation.AboutFragment"
         android:label="AboutFragment">
         <deepLink
             android:id="@+id/deepLink6"

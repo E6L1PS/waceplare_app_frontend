@@ -46,6 +46,7 @@ hilt {
 }
 
 dependencies {
+    implementation Libs.Squareup.Retrofit
     implementation Libs.Other.ViewBindingDelegate
 
     implementation Libs.Google.Hilt
@@ -54,8 +55,7 @@ dependencies {
     implementation project(Modules.Data)
 
     implementation project(Modules.Features.Auth)
-    implementation project(Modules.Features.Search)
-    implementation project(Modules.Features.Favorites)
+    implementation project(Modules.Features.Ads)
     implementation project(Modules.Features.PersonalAds)
     implementation project(Modules.Features.Messages)
     implementation project(Modules.Features.Profile)
