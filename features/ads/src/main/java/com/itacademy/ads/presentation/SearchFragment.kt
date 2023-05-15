@@ -132,7 +132,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
                 favoritesViewModel.deleteFavorite(adId)
             }
 
-        }, this@SearchFragment)
+        })
         binding.recyclerView.apply {
             addItemDecoration(dividerItemDecoration)
             layoutManager = LinearLayoutManager(activity)

@@ -18,7 +18,7 @@ interface AdOnClickListener {
     fun deleteFavorite(adId: Long)
 }
 
-class AdsAdapter(private val adOnClickListener: AdOnClickListener, private val context: Fragment) :
+class AdsAdapter(private val adOnClickListener: AdOnClickListener) :
     RecyclerView.Adapter<AdsAdapter.AdsVH>(), View.OnClickListener {
 
     inner class AdsVH(val binding: ItemAdBinding) : RecyclerView.ViewHolder(binding.root)
@@ -34,27 +34,15 @@ class AdsAdapter(private val adOnClickListener: AdOnClickListener, private val c
         }
 
     }
-    private val differIdsCallback = object : DiffUtil.ItemCallback<Long>() {
-
-        override fun areItemsTheSame(oldItem: Long, newItem: Long): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areContentsTheSame(oldItem: Long, newItem: Long): Boolean {
-            return oldItem == newItem
-        }
-
-    }
 
     val differ = AsyncListDiffer(this, differCallback)
-    val differIds = AsyncListDiffer(this, differIdsCallback)
     val favoriteIds = mutableListOf<Long>()
 
-   fun submitFavoriteIds(favoriteIds: List<Long>?) {
+    fun submitFavoriteIds(favoriteIds: List<Long>?) {
         this.favoriteIds.clear()
-       if (favoriteIds != null) {
-           this.favoriteIds.addAll(favoriteIds)
-       }
+        if (favoriteIds != null) {
+            this.favoriteIds.addAll(favoriteIds)
+        }
         notifyDataSetChanged()
     }
 
@@ -83,10 +71,6 @@ class AdsAdapter(private val adOnClickListener: AdOnClickListener, private val c
             tvPrice.text = String.format("%,d", ad.price).replace(",", " ").plus(" Р")
             tvDateOfCreation.text = ad.dateOfCreated
 
-
-            //cbFavorite.isChecked = ad.isFavorite
-
-            Log.d("LIIIIST", "$differIds")
             if (favoriteIds.contains(ad.id)) {
                 ivFavorite.setImageResource(com.itacademy.theme.R.drawable.favorite_true_ic)
             } else {
@@ -103,8 +87,6 @@ class AdsAdapter(private val adOnClickListener: AdOnClickListener, private val c
                 }
             }
 
-         //   Log.d("CHECKED_ADD", "isFavorite  ${ad.id} ${ad.isFavorite}")
-
             /*cbFavorite.setOnCheckedChangeListener { _, isChecked ->
 
                 if (isChecked) {
@@ -117,17 +99,10 @@ class AdsAdapter(private val adOnClickListener: AdOnClickListener, private val c
 
             }*/
 
-            //cbFavorite.isChecked = ad.isFavorite
-         //   Log.d("CHECKED_ADD", ad.isFavorite.toString())
-            //val random = Random.nextInt(500)
+            Glide.with(holder.itemView.context)
+                .load("http://192.168.0.106:8080/api/v1/ads/${ad.id}/image")
+                .into(ivAd)
 
-            //http://192.168.0.106:8080/api/v1/ads/${ad.id}/image
-
-            if (context != null) {
-                Glide.with(context)
-                    .load("http://192.168.153.69:8080/api/v1/ads/4/image")
-                    .into(ivAd)
-            }
         }
     }
 

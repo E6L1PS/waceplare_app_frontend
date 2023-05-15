@@ -13,7 +13,11 @@ interface AdsApi {
     suspend fun getAds(): Response<List<Ad>>
 
     @POST("ads")
-    suspend fun postAd(@Body ad: AdDTO): Response<Unit>
+    suspend fun postAd(@Body ad: AdDTO): Response<Long>
+
+    @Multipart
+    @POST("ads/images")
+    suspend fun postAdWithImages(@Part adDto: AdDTO, @Part files: List<MultipartBody.Part>): Response<Unit>
 
     @DELETE("ads/my/{adId}")
     suspend fun deleteAd(@Path("adId") adId: Long): Response<Unit>
@@ -25,7 +29,7 @@ interface AdsApi {
     suspend fun showAd(@Path("adId") adId: Long): Response<Unit>
 
     @Multipart
-    @POST("{adId}/images")
+    @POST("ads/{adId}/images")
     suspend fun uploadImages(
         @Path("adId") adId: Long,
         @Part files: List<MultipartBody.Part>

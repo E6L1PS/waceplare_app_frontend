@@ -9,7 +9,8 @@ import java.io.File
 
 interface PersonalAdsDataRepository {
     suspend fun getAds(): Flow<Resource<List<Ad>?>>
-    suspend fun postAd(ad: AdDTO)
+    suspend fun postAd(ad: AdDTO): Resource<Long?>
+    suspend fun postAdWithImages(ad: AdDTO, images: List<ByteArray?>)
     suspend fun deleteAd(adId: Long)
     suspend fun hideAd(adId: Long)
     suspend fun showAd(adId: Long)

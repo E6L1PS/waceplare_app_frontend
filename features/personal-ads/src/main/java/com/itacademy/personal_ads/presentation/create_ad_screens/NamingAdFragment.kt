@@ -9,17 +9,22 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.itacademy.common.Resource
+import com.itacademy.common.model.AdDTO
+import com.itacademy.common.model.StateAd
+import com.itacademy.common.model.TypeAd
 import com.itacademy.navigation.NavCommand
 import com.itacademy.navigation.NavCommands
 import com.itacademy.navigation.navigate
 import com.itacademy.personal_ads.R
 import com.itacademy.personal_ads.databinding.FragmentNamingAdBinding
-import com.itacademy.personal_ads.domain.model.AdDTO
-import com.itacademy.personal_ads.domain.model.StateAd
-import com.itacademy.personal_ads.domain.model.TypeAd
 import com.itacademy.personal_ads.presentation.PersonalAdsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NamingAdFragment : Fragment(R.layout.fragment_naming_ad) {
@@ -38,6 +43,7 @@ class NamingAdFragment : Fragment(R.layout.fragment_naming_ad) {
         val tilDescription = binding.tilDescriptionAd
 
         val btn = binding.btnNext
+
 
         etTitle.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -75,48 +81,59 @@ class NamingAdFragment : Fragment(R.layout.fragment_naming_ad) {
             val title = etTitle.text
             val description = etDescription.text
             val titleHasNotError = !title.isNullOrEmpty() && tilTitle.error.isNullOrEmpty()
-            val descriptionHasNotError = !description.isNullOrEmpty() && tilDescription.error.isNullOrEmpty()
+            val descriptionHasNotError =
+                !description.isNullOrEmpty() && tilDescription.error.isNullOrEmpty()
 
             if (titleHasNotError && descriptionHasNotError) {
                 val type = arguments?.getString("type").toString()
-                if (type == StateAd.NEW.name || type == StateAd.USED.name) {
-                    Log.d("dadadAda", type)
-                    viewModel.postAd(
-                        AdDTO(
-                            100,
-                            title.toString(),
-                            description.toString(),
-                            TypeAd.STUFF,
-                            StateAd.valueOf(type)
-                        )
-                    )
 
-                    navigate(
-                        NavCommand(
-                            NavCommands.DeepLink(
-                                url = Uri.parse("waceplare://upload_images")
-                            )
-                        )
-                    )
-
-                } else {
-                    Log.d("dadadAda", type)
-                    viewModel.postAd(AdDTO(
+                Log.d("dadadAda", type)
+                val typeIsNewOrUsed = type == StateAd.NEW.name || type == StateAd.USED.name
+                viewModel.postAd(
+                    AdDTO(
                         100,
                         title.toString(),
                         description.toString(),
-                        TypeAd.valueOf(type),
-                        null
-                    ))
-
-                    navigate(
-                        NavCommand(
-                            NavCommands.DeepLink(
-                                url = Uri.parse("waceplare://upload_images")
-                            )
-                        )
+                        if (typeIsNewOrUsed) {
+                            TypeAd.STUFF
+                        } else {
+                            TypeAd.valueOf(type)
+                        },
+                        if (typeIsNewOrUsed) {
+                            StateAd.valueOf(type)
+                        } else {
+                            null
+                        }
                     )
+                )
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.adId.onEach { resource ->
+                        when (resource) {
+                            is Resource.Success -> {
+                                val adId: Long = resource.data ?: 0L
+
+                                navigate(
+                                    NavCommand(
+                                        NavCommands.DeepLink(
+                                            url = Uri.parse("waceplare://upload_images/${adId}")
+                                        )
+                                    )
+                                )
+
+                            }
+                            is Resource.Loading -> {
+
+
+                            }
+                            is Resource.Error -> {
+
+                            }
+                        }
+                    }.collect()
+
                 }
+
 
             } else {
                 Toast.makeText(context, "Исправьте ошибку!", Toast.LENGTH_LONG).show()

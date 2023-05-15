@@ -37,8 +37,23 @@ class PersonalAdsDataRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-    override suspend fun postAd(ad: AdDTO) {
+    override suspend fun postAd(ad: AdDTO): Resource<Long?> {
         val response = api.postAd(ad)
+        return if (response.isSuccessful) {
+            Log.d("ADDDDDDDDID", response.body().toString())
+            Resource.success(response.body())
+        } else {
+            Log.d("ADDDDDDDDID", "itsnotok")
+            Resource.error(response.message(), null)
+        }
+    }
+
+    override suspend fun postAdWithImages(ad: AdDTO, images: List<ByteArray?>) {
+        val imageParts = images.map { bytes ->
+            createMultipartBodyPart(bytes)
+        }
+
+        val response = api.postAdWithImages(ad, imageParts)
         if (response.isSuccessful) {
             Resource.success(response.body())
         } else {

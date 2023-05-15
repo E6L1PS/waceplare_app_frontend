@@ -44,6 +44,28 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), MenuProvider {
         super.onViewCreated(view, savedInstanceState)
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
         setupRV()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.favoriteIds
+                .onEach { resource ->
+                    when (resource) {
+                        is Resource.Success -> {
+                            val data = resource.data
+                            Log.d("LIIIIST", "$data")
+                            favoritesAdapter.submitFavoriteIds(data)
+                        }
+
+                        is Resource.Loading -> {
+
+                        }
+
+                        is Resource.Error -> {
+
+                        }
+                    }
+                }.collect()
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.favorites.onEach {
                 when (it) {
@@ -120,7 +142,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), MenuProvider {
                 viewModel.deleteFavorite(adId)
             }
 
-        }, this@FavoritesFragment)
+        })
 
         binding.rvFavorites.apply {
             addItemDecoration(dividerItemDecoration)

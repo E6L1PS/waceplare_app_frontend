@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -29,16 +28,14 @@ class UploadImagesFragment : Fragment(R.layout.fragment_upload_images) {
     private val pickImagesLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val selectedByteArrayImages = mutableListOf<ByteArray?>()
                 val clipData = result.data?.clipData
 
                 CoroutineScope(Dispatchers.IO).launch {
-
+                    val selectedByteArrayImages = mutableListOf<ByteArray?>()
                     if (clipData != null) {
                         for (i in 0 until clipData.itemCount) {
                             val uri = clipData.getItemAt(i).uri
                             val bytes = readBytes(uri)
-                            Log.d("bytes___", bytes.toString())
                             selectedByteArrayImages.add(bytes)
                         }
                     } else {
@@ -47,14 +44,16 @@ class UploadImagesFragment : Fragment(R.layout.fragment_upload_images) {
                             val bytes = readBytes(uri)
                             selectedByteArrayImages.add(bytes)
                         }
+
                     }
 
+                    val adId = arguments?.getString("adId")?.toLong() ?: 0L
+
+                    if (adId != 0L) {
+                        viewModel.uploadImages(adId, selectedByteArrayImages)
+                    }
                 }
 
-
-                Log.d("bytes___", selectedByteArrayImages.toString())
-
-                viewModel.uploadImages(2, selectedByteArrayImages)
             }
         }
 
@@ -62,7 +61,6 @@ class UploadImagesFragment : Fragment(R.layout.fragment_upload_images) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnNext.setOnClickListener {
-
             selectImagesFromGallery()
 
             /*  navigate(

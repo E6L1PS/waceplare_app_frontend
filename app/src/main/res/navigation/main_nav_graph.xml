@@ -68,7 +68,7 @@
         android:label="UploadImagesFragment">
         <deepLink
             android:id="@+id/deepLink7"
-            app:uri="waceplare://upload_images" />
+            app:uri="waceplare://upload_images/{adId}" />
     </fragment>
     <include app:graph="@navigation/auth_nav_graph" />
 </navigation>
