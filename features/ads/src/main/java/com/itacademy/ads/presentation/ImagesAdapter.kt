@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.itacademy.ads.databinding.ItemImageBinding
+import com.itacademy.common.model.AdImage
 
-class ImagesAdapter(val list: List<Long>) : RecyclerView.Adapter<ImagesAdapter.ImagesVH>() {
+class ImagesAdapter(val images: List<AdImage>) : RecyclerView.Adapter<ImagesAdapter.ImagesVH>() {
 
     inner class ImagesVH(val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -22,12 +23,12 @@ class ImagesAdapter(val list: List<Long>) : RecyclerView.Adapter<ImagesAdapter.I
         )
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = images.size
 
     override fun onBindViewHolder(holder: ImagesVH, position: Int) {
         holder.binding.tvImageCounter.text = "${position + 1} - $itemCount"
         Glide.with(holder.itemView.context)
-            .load("https://picsum.photos/id/${list[position]}/500/500")
+            .load("http://192.168.0.106:8080/api/v1/ads/image?url=${images[position].url}")
             .into(holder.binding.ivImage)
     }
 

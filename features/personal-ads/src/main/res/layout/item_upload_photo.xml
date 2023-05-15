@@ -14,5 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintCircleRadius="30dp"
+        android:clickable="true"
+        android:focusable="true"
         app:srcCompat="@drawable/ic_upload_photo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

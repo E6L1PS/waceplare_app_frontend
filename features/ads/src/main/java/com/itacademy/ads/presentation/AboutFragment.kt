@@ -12,6 +12,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.ads.R
 import com.itacademy.ads.databinding.FragmentAboutBinding
 import com.itacademy.common.Resource
+import com.itacademy.common.model.AdImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -25,7 +26,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRV()
+
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.ad.collect { resource ->
@@ -41,6 +42,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
                             tvDescription.text = ad!!.description
                             tvAdditionalInfo.text = ad!!.title
                             Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
+                            setupRV(ad.images)
                         }
 
                         is Resource.Loading -> {
@@ -60,8 +62,8 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
     }
 
 
-    private fun setupRV() {
-        imagesAdapter = ImagesAdapter(listOf(12, 23, 32, 1))
+    private fun setupRV(images: List<AdImage>) {
+        imagesAdapter = ImagesAdapter(images)
 
         binding.rvImages.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)

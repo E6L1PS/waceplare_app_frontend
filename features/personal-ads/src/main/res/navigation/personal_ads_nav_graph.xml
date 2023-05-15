@@ -8,12 +8,18 @@
         android:id="@+id/adsFragment"
         android:name="com.itacademy.personal_ads.presentation.AdsFragment"
         android:label="fragment_ads"
-        tools:layout="@layout/fragment_ads" />
+        tools:layout="@layout/fragment_ads">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="waceplare://ads_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/hideAdsFragment"
         android:name="com.itacademy.personal_ads.presentation.HideAdsFragment"
         android:label="HideAdsFragment" />
-    <deepLink
-        android:id="@+id/deepLink"
-        app:uri="waceplare://ads_fragment" />
+
+    <fragment
+        android:id="@+id/uploadImagesFragment"
+        android:name="com.itacademy.personal_ads.presentation.create_ad_screens.UploadImagesFragment"
+        android:label="UploadImagesFragment" />
 </navigation>
