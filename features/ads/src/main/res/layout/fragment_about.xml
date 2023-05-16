@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:paddingBottom="30dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="30dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_images"
@@ -22,6 +22,7 @@
             android:id="@+id/tv_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="20dp"
             android:textSize="30sp"
             android:textStyle="bold"
             tools:text="4 000 Р" />
@@ -30,6 +31,7 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
             android:textSize="26sp"
             tools:text="Планшет графический Wacom CTL-671" />
 
@@ -39,7 +41,9 @@
             android:layout_height="wrap_content"
             android:textSize="26sp"
             android:textStyle="bold"
-            tools:text="Олег" />
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:text="Продавец,"/>
 
         <Button
             android:id="@+id/btn_write"
@@ -51,6 +55,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="20dp"
             android:text="@string/characteristic"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -59,13 +64,14 @@
             android:id="@+id/tv_characteristic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            tools:text="Характеристики" />
+            android:paddingTop="10dp"
+            android:text="@string/ad_characteristic_info"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="20dp"
             android:text="@string/description"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -74,7 +80,9 @@
             android:id="@+id/tv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
             android:textSize="20sp"
+            android:paddingBottom="20dp"
             tools:text="вфвфвфывыфвфывф\ngrege\ngerge\nerteterterterte\nrtewtretrwetrwtw\nwerwerwerw\nrtetertert\nretwrtw" />
 
         <Button
@@ -88,6 +96,7 @@
             android:id="@+id/tv_additional_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="20dp"
             android:text="@string/ad_info"
             android:textColor="@color/gray"
             android:textSize="16sp" />

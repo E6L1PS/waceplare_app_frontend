@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/personal_ads_nav_graph"
     app:startDestination="@id/adsFragment">
+
     <fragment
         android:id="@+id/adsFragment"
         android:name="com.itacademy.personal_ads.presentation.AdsFragment"
@@ -13,13 +14,10 @@
             android:id="@+id/deepLink"
             app:uri="waceplare://ads_fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/hideAdsFragment"
         android:name="com.itacademy.personal_ads.presentation.HideAdsFragment"
         android:label="HideAdsFragment" />
 
-    <fragment
-        android:id="@+id/uploadImagesFragment"
-        android:name="com.itacademy.personal_ads.presentation.create_ad_screens.UploadImagesFragment"
-        android:label="UploadImagesFragment" />
 </navigation>

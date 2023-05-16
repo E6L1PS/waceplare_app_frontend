@@ -8,4 +8,6 @@
     <string name="type">Выберете тип объявления</string>
     <string name="upload_title">Внешний вид</string>
     <string name="photos">Фотографии</string>
+    <string name="upload_image">Загрузить изображение</string>
+    <string name="specify_price">Укажите цену</string>
 </resources>

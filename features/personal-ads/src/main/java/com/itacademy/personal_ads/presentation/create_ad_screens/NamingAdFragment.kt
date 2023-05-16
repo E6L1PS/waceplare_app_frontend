@@ -42,6 +42,9 @@ class NamingAdFragment : Fragment(R.layout.fragment_naming_ad) {
         val etDescription = binding.tiEtDescriptionAd
         val tilDescription = binding.tilDescriptionAd
 
+        val etPrice = binding.tiEtPriceAd
+        val tilPrice = binding.tilPriceAd
+
         val btn = binding.btnNext
 
 
@@ -77,21 +80,39 @@ class NamingAdFragment : Fragment(R.layout.fragment_naming_ad) {
             }
         })
 
+        etPrice.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if ((s?.length ?: 0) > 10) {
+                    tilPrice.error = "Название не может превышать 10 символов"
+                } else {
+                    tilPrice.error = null
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+
         btn.setOnClickListener {
             val title = etTitle.text
             val description = etDescription.text
+            val price = etPrice.text
             val titleHasNotError = !title.isNullOrEmpty() && tilTitle.error.isNullOrEmpty()
             val descriptionHasNotError =
                 !description.isNullOrEmpty() && tilDescription.error.isNullOrEmpty()
+            val priceHasNotError = !price.isNullOrEmpty() && tilPrice.error.isNullOrEmpty()
 
-            if (titleHasNotError && descriptionHasNotError) {
+            if (titleHasNotError && descriptionHasNotError && priceHasNotError) {
                 val type = arguments?.getString("type").toString()
 
                 Log.d("dadadAda", type)
                 val typeIsNewOrUsed = type == StateAd.NEW.name || type == StateAd.USED.name
                 viewModel.postAd(
                     AdDTO(
-                        100,
+                        price.toString().toInt(),
                         title.toString(),
                         description.toString(),
                         if (typeIsNewOrUsed) {

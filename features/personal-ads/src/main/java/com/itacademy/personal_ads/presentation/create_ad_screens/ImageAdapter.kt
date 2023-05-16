@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
 import com.itacademy.personal_ads.databinding.ItemUploadPhotoBinding
 
 class ImageAdapter(private val uris: List<Uri>) : RecyclerView.Adapter<ImageAdapter.ImageVH>() {
@@ -24,8 +25,10 @@ class ImageAdapter(private val uris: List<Uri>) : RecyclerView.Adapter<ImageAdap
     override fun getItemCount(): Int = uris.size
 
     override fun onBindViewHolder(holder: ImageVH, position: Int) {
+
         Glide.with(holder.itemView)
             .load(uris[position])
+            .fitCenter()
             .into(holder.binding.imageView)
     }
 }

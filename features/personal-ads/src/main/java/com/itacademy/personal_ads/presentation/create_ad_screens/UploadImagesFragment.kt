@@ -10,7 +10,6 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itacademy.navigation.NavCommand
@@ -20,10 +19,7 @@ import com.itacademy.personal_ads.R
 import com.itacademy.personal_ads.databinding.FragmentUploadImagesBinding
 import com.itacademy.personal_ads.presentation.PersonalAdsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class UploadImagesFragment : Fragment(R.layout.fragment_upload_images) {
@@ -42,34 +38,39 @@ class UploadImagesFragment : Fragment(R.layout.fragment_upload_images) {
             imageUris = savedInstanceState.getParcelableArrayList<Uri>("imageUris")?.toMutableList()
                 ?: mutableListOf()
             // Обновляем адаптер и список картинок
-            binding.rvPhotos.adapter = ImageAdapter(imageUris)
-            binding.rvPhotos.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            with(binding.rvPhotos) {
+                adapter = ImageAdapter(imageUris)
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            }
+
         }
     }
 
     private val pickImagesLauncher =
         registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
             imageUris.addAll(uris)
-            binding.rvPhotos.adapter = ImageAdapter(imageUris)
-            binding.rvPhotos.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvPhotos.adapter?.notifyDataSetChanged()
+            with(binding.rvPhotos) {
+                adapter = ImageAdapter(imageUris)
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter?.notifyDataSetChanged()
+            }
         }
 
-    private fun uploadImages(uris: List<Uri>) = CoroutineScope(Dispatchers.IO).launch {
-        val selectedByteArrayImages = mutableListOf<ByteArray?>()
-        for (uri in uris) {
-            val bytes = readBytes(uri)
-            selectedByteArrayImages.add(bytes)
-        }
+    private fun uploadImages(uris: List<Uri>, callback: () -> Unit) =
+        CoroutineScope(Dispatchers.IO).launch {
+            val selectedByteArrayImages = mutableListOf<ByteArray?>()
+            for (uri in uris) {
+                val bytes = readBytes(uri)
+                selectedByteArrayImages.add(bytes)
+            }
 
-        val adId = arguments?.getString("adId")?.toLong() ?: 0L
+            val adId = arguments?.getString("adId")?.toLong() ?: 0L
 
-        if (adId != 0L) {
-            viewModel.uploadImages(adId, selectedByteArrayImages)
+            if (adId != 0L) {
+                viewModel.uploadImages(adId, selectedByteArrayImages, callback)
+            }
+
         }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,16 +83,28 @@ class UploadImagesFragment : Fragment(R.layout.fragment_upload_images) {
             if (imageUris.isNullOrEmpty()) {
                 Toast.makeText(requireContext(), "Please upload photo", Toast.LENGTH_LONG).show()
             } else {
-                uploadImages(imageUris)
-                /* TODO to add navigate
-                navigate(
-                    NavCommand(
-                        NavCommands.DeepLink(
-                            url = Uri.parse("waceplare://ads_fragment")
+                binding.progressBar.visibility = View.VISIBLE
+                val deferred = CompletableDeferred<Unit>()
+
+                uploadImages(imageUris) {
+                    deferred.complete(Unit)
+                }
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    deferred.await()
+                    binding.progressBar.visibility = View.GONE
+
+                    navigate(
+                        NavCommand(
+                            NavCommands.DeepLink(
+                                url = Uri.parse("waceplare://main"),
+                                isSingleTop = true
+                            )
                         )
                     )
 
-                )*/
+
+                }
             }
         }
     }

@@ -44,9 +44,10 @@ class PersonalAdsViewModel @Inject constructor(
         }
     }
 
-    fun uploadImages(adId: Long, images: List<ByteArray?>) {
+    fun uploadImages(adId: Long, images: List<ByteArray?>, callback: () -> Unit) {
         viewModelScope.launch {
             uploadImagesUseCase.uploadImages(adId, images)
+            callback()
         }
     }
 

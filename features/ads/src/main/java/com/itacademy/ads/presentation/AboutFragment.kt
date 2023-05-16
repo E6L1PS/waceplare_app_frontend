@@ -37,10 +37,11 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
                             val ad = resource.data
                             tvPrice.text = "${ad!!.price} Р"
                             tvTitle.text = ad!!.title
-                            tvCharacteristic.text =
-                                getString(R.string.ad_info, ad.id, ad.dateOfCreated, ad.views)
+                            tvCharacteristic.text = getString(R.string.ad_characteristic_info, ad.type.getDisplayName(),
+                                ad.state?.getDisplayName() ?: "отсутствует"
+                            )
                             tvDescription.text = ad!!.description
-                            tvAdditionalInfo.text = ad!!.title
+                            tvAdditionalInfo.text = getString(R.string.ad_info, ad.id, ad.dateOfCreated, ad.views)
                             Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
                             setupRV(ad.images)
                         }
