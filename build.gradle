@@ -31,6 +31,7 @@ buildscript {
                         NavigationUI: "androidx.navigation:navigation-ui-ktx:$nav_version",
                         Room: "androidx.room:room-runtime:$room_version",
                         RoomCompiler: "androidx.room:room-compiler:$room_version",
+                        SwipeRefreshLayout: "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0",
                 ],
                 Google: [
                         Material: "com.google.android.material:material:1.8.0",

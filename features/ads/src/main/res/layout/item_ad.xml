@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/gray"
@@ -22,12 +23,12 @@
         android:id="@+id/tv_title"
         android:layout_width="201dp"
         android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/iv_ad"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         tools:text="sampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletext" />
 
 
@@ -35,9 +36,9 @@
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/iv_ad"
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
@@ -57,18 +58,17 @@
 
     <ImageView
         android:id="@+id/iv_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_title"
-        app:srcCompat="@drawable/favorite_false_ic"
-        />
+        app:srcCompat="@drawable/favorite_false_ic" />
 
-  <!--  <CheckBox
+    <!--  <CheckBox
         android:id="@+id/cb_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

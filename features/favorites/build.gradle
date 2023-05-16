@@ -41,7 +41,8 @@ dependencies {
 
     kapt Libs.Google.HiltCompiler
     implementation Libs.Google.Hilt
-    
+
+    implementation Libs.Android.SwipeRefreshLayout
     implementation Libs.Android.LifecycleViewModelKtx
     implementation Libs.Android.FragmentKtx
 

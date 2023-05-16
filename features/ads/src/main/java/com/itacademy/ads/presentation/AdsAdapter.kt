@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -60,6 +60,7 @@ class AdsAdapter(private val adOnClickListener: AdOnClickListener) :
 
     override fun onBindViewHolder(holder: AdsVH, position: Int) {
         val ad = differ.currentList[position]
+        val color = ContextCompat.getColor(holder.itemView.context, com.itacademy.theme.R.color.gray_low)
 
         with(holder.itemView) {
             tag = ad.id
@@ -70,6 +71,11 @@ class AdsAdapter(private val adOnClickListener: AdOnClickListener) :
             tvTitle.text = ad.title
             tvPrice.text = String.format("%,d", ad.price).replace(",", " ").plus(" Р")
             tvDateOfCreation.text = ad.dateOfCreated
+
+            if (!ad.status) {
+                Log.d("CLLLLL", "${ad.status} ${ad.id}")
+                tvTitle.text = "------------НЕ АКТИВЕН------------ ${ad.title}"
+            }
 
             if (favoriteIds.contains(ad.id)) {
                 ivFavorite.setImageResource(com.itacademy.theme.R.drawable.favorite_true_ic)

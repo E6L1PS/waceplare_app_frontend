@@ -2,9 +2,7 @@ package com.itacademy.personal_ads.presentation
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -33,6 +31,13 @@ class AdsFragment : Fragment(R.layout.fragment_ads) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRV()
+
+        val swipe = binding.swipeAds
+
+        swipe.setOnRefreshListener {
+            viewModel.getAds()
+            swipe.isRefreshing = false
+        }
 
         with(binding) {
             btnEnter.setOnClickListener {
@@ -98,8 +103,8 @@ class AdsFragment : Fragment(R.layout.fragment_ads) {
 
 
     private fun setupRV() {
-        val dividerItemDecoration =
-            DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        val dividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+
         dividerItemDecoration.setDrawable(
             ContextCompat.getDrawable(
                 requireContext(),

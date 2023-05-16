@@ -3,10 +3,7 @@ package com.itacademy.ads.presentation
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
@@ -42,11 +39,26 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
     private val menuHost: MenuHost
         get() = requireActivity()
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        favoritesViewModel.init()
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
         setupRV()
+
+        val swipe = binding.swipeSearch
+
+        swipe.setOnRefreshListener {
+            viewModel.getAds("")
+            swipe.isRefreshing = false
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             favoritesViewModel.favoriteIds
@@ -100,6 +112,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
 
 
     }
+
 
 
     private fun setupRV() {

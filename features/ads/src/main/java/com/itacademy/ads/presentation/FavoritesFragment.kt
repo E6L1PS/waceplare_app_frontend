@@ -3,10 +3,7 @@ package com.itacademy.ads.presentation
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
@@ -40,10 +37,25 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), MenuProvider {
     private lateinit var favoritesAdapter: AdsAdapter
 
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        viewModel.init()
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
         setupRV()
+
+        val swipe = binding.swipeFavorites
+
+        swipe.setOnRefreshListener {
+            viewModel.init()
+            swipe.isRefreshing = false
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.favoriteIds
@@ -70,16 +82,35 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), MenuProvider {
             viewModel.favorites.onEach {
                 when (it) {
                     is Resource.Success -> {
+                        with(binding) {
+                            rvFavorites.visibility = View.VISIBLE
+                            btnSignIn.visibility = View.GONE
+                        }
                         favoritesAdapter.differ.submitList(it.data)
                     }
 
                     is Resource.Loading -> {
-
+                        with(binding) {
+                            btnSignIn.visibility = View.GONE
+                        }
                     }
 
                     is Resource.Error -> {
-                        Toast.makeText(requireContext(), "Error favorites", Toast.LENGTH_LONG)
-                            .show()
+                        with(binding) {
+                            rvFavorites.visibility = View.GONE
+                            btnSignIn.visibility = View.VISIBLE
+
+                            btnSignIn.setOnClickListener {
+                                navigate(
+                                    NavCommand(
+                                        NavCommands.DeepLink(
+                                            url = Uri.parse("waceplare://login"),
+                                            isSingleTop = true
+                                        )
+                                    )
+                                )
+                            }
+                        }
                     }
                 }
             }.collect()
@@ -105,6 +136,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), MenuProvider {
 
             R.id.action_delete_inactive -> {
                 viewModel.deleteInactiveFavorites()
+                setupRV()
                 Toast.makeText(requireContext(), "action_delete_inactive", Toast.LENGTH_LONG).show()
             }
         }

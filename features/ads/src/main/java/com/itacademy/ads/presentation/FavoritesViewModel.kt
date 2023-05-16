@@ -1,5 +1,7 @@
 package com.itacademy.ads.presentation
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.itacademy.ads.domain.usecase.FavoritesUseCase
@@ -9,7 +11,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
     private val favoritesUseCase: FavoritesUseCase
@@ -22,10 +23,13 @@ class FavoritesViewModel @Inject constructor(
     val favoriteIds: StateFlow<Resource<List<Long>?>> = _favoriteIds.asStateFlow()
 
     init {
+        init()
+    }
+
+    fun init() {
         getFavorites()
         getFavoriteIds()
     }
-
     fun getFavorites() {
         viewModelScope.launch {
             _favorites.emitAll(favoritesUseCase.getFavorites())
@@ -42,33 +46,30 @@ class FavoritesViewModel @Inject constructor(
     fun addFavorite(adId: Long) {
         viewModelScope.launch {
             favoritesUseCase.addFavorite(adId)
-            getFavorites()
-            getFavoriteIds()
+            init()
         }
     }
 
     fun deleteFavorite(adId: Long) {
         viewModelScope.launch {
             favoritesUseCase.deleteFavorite(adId)
-            getFavorites()
-            getFavoriteIds()
+            init()
         }
     }
 
     fun deleteFavorites() {
         viewModelScope.launch {
             favoritesUseCase.deleteFavorites()
-            getFavorites()
-            getFavoriteIds()
+            init()
         }
     }
 
     fun deleteInactiveFavorites() {
         viewModelScope.launch {
             favoritesUseCase.deleteInactiveFavorites()
-            getFavorites()
-            getFavoriteIds()
+            init()
         }
     }
 
 }
+
