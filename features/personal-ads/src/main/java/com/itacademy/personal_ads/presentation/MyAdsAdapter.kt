@@ -44,6 +44,8 @@ class MyAdsAdapter : RecyclerView.Adapter<MyAdsAdapter.MyAdsVH>() {
             tvMyTitle.text = ad.title
             tvMyPrice.text = String.format("%,d", ad.price).replace(",", " ").plus(" Р")
             tvViews.text = ad.views.toString()
+            tvContacts.text = "0"
+            tvFavorites.text = ad.favorites.toString()
 
             Glide.with(holder.itemView.context)
                 .load("http://192.168.0.106:8080/api/v1/ads/${ad.id}/image")

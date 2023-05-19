@@ -9,10 +9,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import retrofit2.HttpException
+import java.net.HttpURLConnection
 import javax.inject.Inject
 
 class FavoritesDataRepositoryImpl @Inject constructor(
-    private val api: FavoritesApi
+    private val api: FavoritesApi,
 ) : FavoritesDataRepository {
 
     override suspend fun getFavorites(): Flow<Resource<List<Ad>?>> = flow {
@@ -23,11 +25,19 @@ class FavoritesDataRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             emit(Resource.success(response.body()))
         } else {
-            emit(Resource.error(response.message(), null))
+            if (response.code() == HttpURLConnection.HTTP_FORBIDDEN) {
+                emit(Resource.error("Access denied", null))
+            } else {
+                emit(Resource.error(response.message(), null))
+            }
         }
 
     }.catch { exception ->
-        emit(Resource.error(exception.message ?: "Error occurred", null))
+        if (exception is HttpException && exception.code() == HttpURLConnection.HTTP_FORBIDDEN) {
+            emit(Resource.error("Access denied", null))
+        } else {
+            emit(Resource.error(exception.message ?: "Error occurred", null))
+        }
     }.flowOn(Dispatchers.IO)
 
     override suspend fun getFavoritesId(): Flow<Resource<List<Long>?>> = flow {
@@ -46,19 +56,63 @@ class FavoritesDataRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     override suspend fun addFavorite(adId: Long) {
-        api.addFavoriteAd(adId)
+        try {
+            api.addFavoriteAd(adId)
+        } catch (e: HttpException) {
+            if (e.code() == 403 || e.code() == 401) {
+
+                Resource.error(e.message(), null)
+            } else {
+                Resource.error(e.message(), null)
+            }
+        } catch (e: Exception) {
+            Resource.error(e.toString(), null)
+        }
     }
 
     override suspend fun deleteFavorite(adId: Long) {
-        api.deleteFavoriteAd(adId)
+        try {
+            api.deleteFavoriteAd(adId)
+        } catch (e: HttpException) {
+            if (e.code() == 403 || e.code() == 401) {
+
+                Resource.error(e.message(), null)
+            } else {
+                Resource.error(e.message(), null)
+            }
+        } catch (e: Exception) {
+            Resource.error(e.toString(), null)
+        }
     }
 
     override suspend fun deleteFavorites() {
-        api.deleteFavorites()
+        try {
+            api.deleteFavorites()
+        } catch (e: HttpException) {
+            if (e.code() == 403 || e.code() == 401) {
+
+                Resource.error(e.message(), null)
+            } else {
+                Resource.error(e.message(), null)
+            }
+        } catch (e: Exception) {
+            Resource.error(e.toString(), null)
+        }
     }
 
     override suspend fun deleteInactiveFavorites() {
-        api.deleteInactiveFavorites()
+        try {
+            api.deleteInactiveFavorites()
+        } catch (e: HttpException) {
+            if (e.code() == 403 || e.code() == 401) {
+
+                Resource.error(e.message(), null)
+            } else {
+                Resource.error(e.message(), null)
+            }
+        } catch (e: Exception) {
+            Resource.error(e.toString(), null)
+        }
     }
 
 }

@@ -38,7 +38,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                             email = tiEtEmail.text.toString(),
                             password = password,
                             firstname = tiEtName.text.toString(),
-                            lastname = tiEtLastName.text.toString()
+                            lastname = tiEtLastName.text.toString(),
+                            number = tiEtNumber.text.toString()
                         )
                     )
                 } else {

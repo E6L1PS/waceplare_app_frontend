@@ -42,7 +42,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         favoritesViewModel.init()
         return super.onCreateView(inflater, container, savedInstanceState)
@@ -75,7 +75,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
                         }
 
                         is Resource.Error -> {
-
+                            adsAdapter.submitFavoriteIds(emptyList())
                         }
                     }
                 }.collect()
@@ -103,7 +103,6 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
                         }
                         is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
-                            Toast.makeText(context, resource.message, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -112,7 +111,6 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
 
 
     }
-
 
 
     private fun setupRV() {
@@ -139,6 +137,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView.OnQueryTex
 
             override fun addFavorite(adId: Long) {
                 favoritesViewModel.addFavorite(adId)
+
             }
 
             override fun deleteFavorite(adId: Long) {

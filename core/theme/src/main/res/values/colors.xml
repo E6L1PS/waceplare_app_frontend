@@ -11,6 +11,7 @@
     <color name="gray_low">#8E8585</color>
     <color name="gray_main">#D9D9D9</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="yellow">#FFC107</color>
     <color name="orange">#FF825A</color>
     <color name="orange_low">#FF9A7A</color>
     <color name="orange_main">#FF6A16</color>

@@ -1,5 +1,7 @@
 package com.itacademy.ads.presentation
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -37,6 +39,8 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
                             val ad = resource.data
                             tvPrice.text = "${ad!!.price} Р"
                             tvTitle.text = ad!!.title
+                            tvUser.text = "${ad.userInfo.firstname} ${ad.userInfo.lastname}"
+                            tvRating.text = "${ad.userInfo.rating} ☆☆☆☆☆"
                             tvCharacteristic.text = getString(R.string.ad_characteristic_info, ad.type.getDisplayName(),
                                 ad.state?.getDisplayName() ?: "отсутствует"
                             )
@@ -44,6 +48,13 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
                             tvAdditionalInfo.text = getString(R.string.ad_info, ad.id, ad.dateOfCreated, ad.views)
                             Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
                             setupRV(ad.images)
+
+                            binding.btnCall.setOnClickListener {
+                                val intent = Intent(Intent.ACTION_DIAL)
+                                intent.data = Uri.parse("tel:${ad.userInfo.number}")
+                                startActivity(intent)
+                            }
+
                         }
 
                         is Resource.Loading -> {
